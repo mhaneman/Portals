@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmgo53in14k1w"]
+
+[ext_resource type="PackedScene" uid="uid://bhgl54bwl8iwy" path="res://scenes/game_scene/stage_gen.tscn" id="1_wivac"]
+[ext_resource type="PackedScene" uid="uid://brq1j7u1awgve" path="res://scenes/entites/player.tscn" id="2_gewwx"]
+
+[sub_resource type="Environment" id="Environment_fgtmc"]
+
+[node name="Game" type="Node3D"]
+
+[node name="stage_gen" parent="." instance=ExtResource("1_wivac")]
+
+[node name="Player" parent="." instance=ExtResource("2_gewwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+slide_on_ceiling = false
+floor_constant_speed = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fgtmc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
