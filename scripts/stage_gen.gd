@@ -3,7 +3,7 @@ extends Node3D
 var rng = RandomNumberGenerator.new()
 
 enum Directions {straight, left, right}
-const MIN_DIST:float = 12
+const MIN_DIST:float = 6
 
 
 var connector_scene = preload("res://scenes/game_scene/platforms/connector.tscn")
@@ -16,7 +16,7 @@ var plat_scenes = [
 	]
 	
 var obstical_scenes = [
-	preload("res://scenes/entites/obstacles/barrel.tscn")
+	preload("res://scenes/game_scene/obstacles/barrel.tscn")
 ]
 
 var instanced_platforms = []
@@ -38,35 +38,40 @@ func finalize_path():
 	
 func generate_path():
 	for __ in range(30):
-		add_random_platform()
+		add_platform()
 	
-func add_random_platform():
+func add_platform():
 	var direction:int = rng.randi_range(0, Directions.size() - 1)
 	var type:int = rng.randi_range(0, plat_scenes.size() - 1)
 	var platform = add_platform_to_path(direction, type)
 	
 	# check distances here 
+	for i in instanced_platforms:
+		var dist = platform.global_position.distance_to(i.global_position)
+		if dist < MIN_DIST:
+			print(dist)
 	
 	# summon entites
-	#var obstical = obstical_scenes[0].instantiate()
-	#self.add_child(obstical)
-	#obstical.global_position = platform.global_position
+	# add obsticals if flat
+	# add_obsticals(platform)
 	
 	instanced_platforms.push_back(platform)
 
+func add_obsticals(platform):
+	var obstical = obstical_scenes[0].instantiate()
+	self.add_child(obstical)
+	obstical.global_position = platform.global_position
+	obstical.rotate_y(current_rotation)
 
-func add_platform_to_path(direction:Directions, type=null):
+
+func add_platform_to_path(direction:Directions, type=0):
 	var instance
-	if !type:
-		return
-	elif typeof(type) == TYPE_INT:
+	if typeof(type) == TYPE_INT:
 		instance = plat_scenes[type].instantiate()
 	else:
 		instance = type.instantiate()
 		
 	self.add_child(instance)
-	
-	# instance.scale = Vector3(0.5, 1, 0.75)
 	
 	if direction == Directions.straight:
 		instance.global_position = current_end_point

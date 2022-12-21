@@ -49,6 +49,10 @@ up={
 ]
 }
 
+[physics]
+
+3d/default_gravity=20.0
+
 [rendering]
 
 renderer/rendering_method="mobile"
