@@ -1,14 +1,26 @@
 extends CharacterBody3D
 
-@onready var camera = $Camera
 
-const SPEED = 30.0
 const ROTATE_SPEED = 0.003
+const ACCEL = 0.5
+const MAX_ACCEL = 27
 const JUMP_VELOCITY = 15.0
 
+var speed = 10.0 # probably cap at 25-30
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var theta:float = 0
 var direction = Vector2(0, 1)
+
+func _ready():
+	var gamebus = get_node("/root/gamebus") 
+	gamebus.portal_entered.connect(_on_portal_entered)
+	
+
+func _on_portal_entered():
+	self.global_position = Vector3(0, 3, 3)
+	direction = Vector2(0, 1)
+	theta = 0
+	speed += ACCEL
 
 func _process(_delta):
 	if Input.is_action_just_pressed("left"):
@@ -16,13 +28,13 @@ func _process(_delta):
 	if Input.is_action_just_pressed("right"):
 		theta += -PI / 2
 		
-	self.rotation.y = lerp_angle(self.rotation.y, theta, ROTATE_SPEED * SPEED)
+	self.rotation.y = lerp_angle(self.rotation.y, theta, ROTATE_SPEED * speed)
 
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept"):
 		velocity.y = JUMP_VELOCITY
 	
 	if Input.is_action_just_pressed("left"):
@@ -30,8 +42,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("right"):
 		direction = direction.rotated(PI/2)
 		
-	velocity.x = direction.x * SPEED
-	velocity.z = direction.y * SPEED
+	velocity.x = direction.x * speed
+	velocity.z = direction.y * speed
 	
 	move_and_slide()
 

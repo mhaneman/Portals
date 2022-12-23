@@ -22,7 +22,7 @@ tonemap_white = 0.9
 [node name="stage_gen" parent="." instance=ExtResource("1_wivac")]
 
 [node name="Player" parent="." instance=ExtResource("2_gewwx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true

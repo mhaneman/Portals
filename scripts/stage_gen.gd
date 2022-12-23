@@ -14,7 +14,7 @@ var portal_scene = preload("res://scenes/game_scene/platforms/portal.tscn")
 
 var plat_scenes = [
 	preload("res://scenes/game_scene/platforms/flat.tscn"),
-	# preload("res://scenes/game_scene/platforms/stair.tscn"),
+	#preload("res://scenes/game_scene/platforms/stair.tscn"),
 	preload("res://scenes/game_scene/platforms/down.tscn"),
 	#preload("res://scenes/game_scene/platforms/gap.tscn"),
 	# preload("res://scenes/game_scene/platforms/up.tscn"),
@@ -29,13 +29,29 @@ var current_end_point = Vector3.ZERO
 var current_rotation:float = 0
 var current_scale = Vector3.ONE
 
+func _on_portal_entered():
+	
+	for i in instanced_platforms:
+		i.queue_free()
+	instanced_platforms.clear()
+	
+	current_end_point = Vector3.ZERO
+	current_rotation = 0
+	current_scale = Vector3.ONE
+		
+	initalize_path()
+	generate_path()
+	finalize_path()
+
 func _ready():
+	var gamebus = get_node("/root/gamebus")
+	gamebus.portal_entered.connect(_on_portal_entered)
+	
 	initalize_path()
 	generate_path()
 	finalize_path()
 	
 func initalize_path():
-	add_platform_to_path(Directions.straight, Vector3.ONE, portal_scene)
 	for __ in range(3):
 		add_platform_to_path(Directions.straight, Vector3.ONE, flat_scene)
 		
@@ -84,8 +100,6 @@ func add_random_platform():
 		var dist = platform.global_position.distance_to(i.global_position)
 		if dist < MIN_DIST:
 			print(dist)
-	
-	instanced_platforms.push_back(platform)
 
 func add_platform_to_path(direction:Directions, applied_scale:Vector3, type=0):
 	var instance
@@ -94,6 +108,7 @@ func add_platform_to_path(direction:Directions, applied_scale:Vector3, type=0):
 	else:
 		instance = type.instantiate()
 	self.add_child(instance)
+	instanced_platforms.push_back(instance)
 	
 	instance.scale = applied_scale
 	
@@ -105,6 +120,7 @@ func add_platform_to_path(direction:Directions, applied_scale:Vector3, type=0):
 		
 	var connector = connector_scene.instantiate()
 	self.add_child(connector) 
+	instanced_platforms.push_back(connector)
 	connector.global_position = current_end_point
 	connector.rotate_y(current_rotation) 
 	
