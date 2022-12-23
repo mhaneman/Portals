@@ -4,8 +4,9 @@ extends CharacterBody3D
 const ROTATE_SPEED = 0.003
 const ACCEL = 0.5
 const MAX_ACCEL = 27
-const JUMP_VELOCITY = 15.0
 
+# consider jump as a powerup item
+var JUMP_VELOCITY = 10.0 # the more coins, the higher the jump -> 15 max
 var speed = 10.0 # probably cap at 25-30
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var theta:float = 0
