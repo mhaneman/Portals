@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxdcfytx6vus8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_q0rx0"]
+height = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7y622"]
+albedo_color = Color(0.694118, 0.529412, 0.211765, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_llsyd"]
+material = SubResource("StandardMaterial3D_7y622")
+height = 0.25
+
+[node name="coin" type="Area3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_q0rx0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CylinderMesh_llsyd")

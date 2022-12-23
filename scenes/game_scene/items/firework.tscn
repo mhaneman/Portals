@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0acivu131oue"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sebdv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fjwjy"]
+albedo_color = Color(0.623529, 0.313726, 0.768627, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kvtt3"]
+material = SubResource("StandardMaterial3D_fjwjy")
+
+[node name="firework" type="Area3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_sebdv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CapsuleMesh_kvtt3")

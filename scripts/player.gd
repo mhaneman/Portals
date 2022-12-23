@@ -12,8 +12,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var theta:float = 0
 var direction = Vector2(0, 1)
 
+@onready var gamebus = get_node("/root/gamebus") 
+
 func _ready():
-	var gamebus = get_node("/root/gamebus") 
 	gamebus.portal_entered.connect(_on_portal_entered)
 	
 
@@ -35,6 +36,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
+	# jump uses a single firework
 	if Input.is_action_just_pressed("ui_accept"):
 		velocity.y = JUMP_VELOCITY
 	
