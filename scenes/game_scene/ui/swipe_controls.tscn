@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://f0q78gql5t3k"]
+
+[ext_resource type="Script" path="res://scripts/swipe_detector.gd" id="1_bn0io"]
+
+[node name="swipe_controls" type="Node"]
+script = ExtResource("1_bn0io")

@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmgo53in14k1w"]
+[gd_scene load_steps=6 format=3 uid="uid://c85be7yfutqhl"]
 
-[ext_resource type="PackedScene" uid="uid://bhgl54bwl8iwy" path="res://scenes/game_scene/stage_gen.tscn" id="1_wivac"]
+[ext_resource type="PackedScene" uid="uid://bhgl54bwl8iwy" path="res://scenes/game_scene/stages/stage_gen.tscn" id="1_wivac"]
 [ext_resource type="PackedScene" uid="uid://brq1j7u1awgve" path="res://scenes/entites/player.tscn" id="2_gewwx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d3nad"]
@@ -10,7 +10,7 @@ sky_material = SubResource("ProceduralSkyMaterial_d3nad")
 
 [sub_resource type="Environment" id="Environment_fgtmc"]
 background_mode = 1
-background_color = Color(0.235294, 0.737255, 1, 1)
+background_color = Color(0.709804, 0.886275, 1, 1)
 background_energy_multiplier = 0.4
 sky = SubResource("Sky_afo7d")
 tonemap_mode = 3

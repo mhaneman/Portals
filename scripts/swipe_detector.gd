@@ -5,13 +5,15 @@ var detect_radius:float = 100
 var start_pos:Vector2
 var can_detect:bool
 
+# tap/hold left and right side of screen for adjustments
+
 func _unhandled_input(event):
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			start_pos = event.position
 			can_detect = true
 
-func _process(delta):
+func _process(_delta):
 	if can_detect:
 		var cur_pos:Vector2 = get_viewport().get_mouse_position()
 		var disp:float = start_pos.distance_to(cur_pos)
