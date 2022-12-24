@@ -25,9 +25,12 @@ var obstical_scenes = [
 ]
 
 var instanced_platforms = []
+var instanced_connectors = []
 var current_end_point = Vector3.ZERO
 var current_rotation:float = 0
 var current_scale = Vector3.ONE
+
+var stage_number:int = 0
 
 func _on_portal_entered():
 	
@@ -35,20 +38,27 @@ func _on_portal_entered():
 		i.queue_free()
 	instanced_platforms.clear()
 	
+	for i in instanced_connectors:
+		i.queue_free()
+	instanced_connectors.clear()
+	
 	current_end_point = Vector3.ZERO
 	current_rotation = 0
 	current_scale = Vector3.ONE
+	
+	stage_number += 1
 		
-	initalize_path()
-	generate_path()
-	finalize_path()
+	generator()
 
 func _ready():
 	var gamebus = get_node("/root/gamebus")
 	gamebus.portal_entered.connect(_on_portal_entered)
 	
+	generator()
+	
+func generator():
 	initalize_path()
-	generate_path()
+	generate_path(stage_number)
 	finalize_path()
 	
 func initalize_path():
@@ -58,10 +68,10 @@ func initalize_path():
 func finalize_path():
 	add_platform_to_path(Directions.straight, Vector3.ONE, portal_scene)
 	
-func generate_path():
+func generate_path(stage_number:int):
 	# generate_spiral()
 	# generate_flat_obsticals()
-	for __ in range(20):
+	for __ in range(stage_number * 2 + 3):
 		add_random_platform()
 		
 func generate_spiral():
@@ -120,7 +130,7 @@ func add_platform_to_path(direction:Directions, applied_scale:Vector3, type=0):
 		
 	var connector = connector_scene.instantiate()
 	self.add_child(connector) 
-	instanced_platforms.push_back(connector)
+	instanced_connectors.push_back(connector)
 	connector.global_position = current_end_point
 	connector.rotate_y(current_rotation) 
 	

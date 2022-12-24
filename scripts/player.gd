@@ -7,7 +7,7 @@ const MAX_ACCEL = 27
 
 # consider jump as a powerup item
 var JUMP_VELOCITY = 10.0 # the more coins, the higher the jump -> 15 max
-var speed = 10.0 # probably cap at 25-30
+var speed = 15.0 # probably cap at 25-30
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var theta:float = 0
 var direction = Vector2(0, 1)
@@ -52,7 +52,6 @@ func _physics_process(delta):
 
 
 func _on_swipe_controls_swiped(sig):
-	print(sig)
 	if sig == "jump":
 		velocity.y = JUMP_VELOCITY
 	if sig == "left":
