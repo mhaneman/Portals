@@ -2,32 +2,37 @@
 
 [ext_resource type="Script" path="res://scripts/portal_area.gd" id="1_wmuhd"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_coqwj"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_axmkc"]
 size = Vector3(4, 1, 4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_yooxc"]
+[sub_resource type="BoxMesh" id="BoxMesh_ufa7c"]
 size = Vector3(4, 1, 4)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_4won0"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_bmrqq"]
 radius = 6.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgdsd"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4w4g"]
 albedo_color = Color(0, 0, 0, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_78w3m"]
-material = SubResource("StandardMaterial3D_lgdsd")
+[sub_resource type="SphereMesh" id="SphereMesh_wnqwb"]
+material = SubResource("StandardMaterial3D_r4w4g")
 radius = 6.0
 height = 12.0
 
 [node name="portal" type="StaticBody3D"]
 collision_mask = 2
 
+[node name="end_point" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="spawns" type="Node3D" parent="."]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2)
-shape = SubResource("BoxShape3D_coqwj")
+shape = SubResource("BoxShape3D_axmkc")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("BoxMesh_yooxc")
+mesh = SubResource("BoxMesh_ufa7c")
 
 [node name="portal_area" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 2)
@@ -36,12 +41,9 @@ collision_mask = 2
 script = ExtResource("1_wmuhd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="portal_area"]
-shape = SubResource("SphereShape3D_4won0")
+shape = SubResource("SphereShape3D_bmrqq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="portal_area/CollisionShape3D"]
-mesh = SubResource("SphereMesh_78w3m")
-
-[node name="end_point" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+mesh = SubResource("SphereMesh_wnqwb")
 
 [connection signal="body_entered" from="portal_area" to="portal_area" method="_on_body_entered"]

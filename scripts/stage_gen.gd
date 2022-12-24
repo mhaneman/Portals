@@ -7,18 +7,28 @@ const MIN_DIST:float = 6
 
 
 var connector_scene = preload("res://scenes/game_scene/platforms/connector.tscn")
+
+#platform scenes
 var flat_scene = preload("res://scenes/game_scene/platforms/flat.tscn")
 var stair_scene = preload("res://scenes/game_scene/platforms/stair.tscn")
 var down_scene = preload("res://scenes/game_scene/platforms/down.tscn")
 var portal_scene = preload("res://scenes/game_scene/platforms/portal.tscn")
 
-var plat_scenes = [
+
+# item scenes
+var coin_scene = preload("res://scenes/game_scene/items/coin.tscn")
+var firework_scene = preload("res://scenes/game_scene/items/firework.tscn")
+
+	
+var down_scenes = [
 	preload("res://scenes/game_scene/platforms/flat.tscn"),
-	#preload("res://scenes/game_scene/platforms/stair.tscn"),
 	preload("res://scenes/game_scene/platforms/down.tscn"),
-	#preload("res://scenes/game_scene/platforms/gap.tscn"),
-	# preload("res://scenes/game_scene/platforms/up.tscn"),
-	]
+]
+
+var up_scenes = [
+	preload("res://scenes/game_scene/platforms/flat.tscn"),
+	preload("res://scenes/game_scene/platforms/stair.tscn"),
+]
 	
 var obstical_scenes = [
 	preload("res://scenes/game_scene/obstacles/barrel.tscn")
@@ -26,84 +36,58 @@ var obstical_scenes = [
 
 var instanced_platforms = []
 var instanced_connectors = []
+var instanced_items = []
 var current_end_point = Vector3.ZERO
 var current_rotation:float = 0
 var current_scale = Vector3.ONE
 
-var stage_number:int = 0
-
-func _on_portal_entered():
-	
-	for i in instanced_platforms:
-		i.queue_free()
-	instanced_platforms.clear()
-	
-	for i in instanced_connectors:
-		i.queue_free()
-	instanced_connectors.clear()
-	
-	current_end_point = Vector3.ZERO
-	current_rotation = 0
-	current_scale = Vector3.ONE
-	
-	stage_number += 1
-		
-	generator()
-
+@onready var gamebus = get_node("/root/gamebus")
 func _ready():
-	var gamebus = get_node("/root/gamebus")
 	gamebus.portal_entered.connect(_on_portal_entered)
 	
 	generator()
 	
 func generator():
 	initalize_path()
-	generate_path(stage_number)
+	generate_path(down_scenes)
 	finalize_path()
+	
+	for i in instanced_connectors:
+		for j in i.get_node("spawns").get_children():
+			add_item_to_path(firework_scene, j.global_position)
+			
+	for i in instanced_platforms:
+		for j in i.get_node("spawns").get_children():
+			add_item_to_path(coin_scene, j.global_position)
+			
+func add_item_to_path(scene, pos:Vector3):
+	var instance = scene.instantiate()
+	self.add_child(instance)
+	instance.global_position = pos
+	instanced_items.push_back(instance)
 	
 func initalize_path():
 	for __ in range(3):
-		add_platform_to_path(Directions.straight, Vector3.ONE, flat_scene)
+		add_platform_to_path( flat_scene, Directions.straight, Vector3.ONE)
 		
 func finalize_path():
-	add_platform_to_path(Directions.straight, Vector3.ONE, portal_scene)
+	var final = add_platform_to_path(portal_scene, Directions.straight, Vector3.ONE)
 	
-func generate_path(stage_number:int):
-	# generate_spiral()
-	# generate_flat_obsticals()
-	for __ in range(stage_number * 2 + 3):
-		add_random_platform()
-		
-func generate_spiral():
-	for __ in range(4):
-		add_platform_to_path(rng.randi_range(1, 2), Vector3.ONE, down_scene)
-		add_platform_to_path(Directions.straight, Vector3.ONE, down_scene)
-		
-	for __ in range(4):
-		add_platform_to_path(Directions.left, Vector3.ONE, down_scene)
-		
-func generate_flat_obsticals():
-	for __ in range(6):
-		var platform = add_platform_to_path(Directions.straight, Vector3.ONE, flat_scene)
-		add_obsticals_to_flat(platform)
-		
-func add_obsticals_to_flat(platform):
-	var end = platform.get_node("end_point").global_position
-	var disp = platform.global_position - end
-	var density = 2
+	if final.global_position.y < 0:
+		gamebus.out_of_bounds_y = final.global_position.y - 50
+	else:
+		gamebus.out_of_bounds_y = -50
 	
-	for i in range(0, density):
-		var obstical = obstical_scenes[0].instantiate()
-		self.add_child(obstical)
-		obstical.global_position = platform.global_position + i * (disp / density)
-		obstical.rotate_y(current_rotation)
+func generate_path(scenes):
+	for __ in range(gamebus.stage_number * 2 + 3):
+		add_random_platform(scenes)
 	
 # keep platform generation in area
-func add_random_platform():
+func add_random_platform(scenes):
 	var direction:int = rng.randi_range(0, Directions.size() - 1)
-	var type:int = rng.randi_range(0, plat_scenes.size() - 1)
+	var type:int = rng.randi_range(0, scenes.size() - 1)
 	var applied_scale = Vector3.ONE
-	var platform = add_platform_to_path(direction, applied_scale, type)
+	var platform = add_platform_to_path(scenes[type], direction, applied_scale)
 	
 	# check distances here 
 	for i in instanced_platforms:
@@ -111,12 +95,8 @@ func add_random_platform():
 		if dist < MIN_DIST:
 			print(dist)
 
-func add_platform_to_path(direction:Directions, applied_scale:Vector3, type=0):
-	var instance
-	if typeof(type) == TYPE_INT:
-		instance = plat_scenes[type].instantiate()
-	else:
-		instance = type.instantiate()
+func add_platform_to_path(scene, direction:Directions, applied_scale:Vector3):
+	var instance = scene.instantiate()
 	self.add_child(instance)
 	instanced_platforms.push_back(instance)
 	
@@ -144,3 +124,27 @@ func add_platform_to_path(direction:Directions, applied_scale:Vector3, type=0):
 	instance.rotate_y(current_rotation)
 	current_end_point = instance.get_node("end_point").global_position
 	return instance
+	
+	
+#signals 
+func _on_portal_entered():
+	
+	for i in instanced_platforms:
+		i.queue_free()
+	instanced_platforms.clear()
+	
+	for i in instanced_connectors:
+		i.queue_free()
+	instanced_connectors.clear()
+	
+	for i in instanced_items:
+		i.queue_free()
+	instanced_items.clear()
+	
+	current_end_point = Vector3.ZERO
+	current_rotation = 0
+	current_scale = Vector3.ONE
+	
+	gamebus.stage_number += 1
+		
+	generator()

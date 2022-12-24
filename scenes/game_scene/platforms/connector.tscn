@@ -1,24 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://b0iy0r2l8b324"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_b4jpo"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_nvrlb"]
 size = Vector3(4, 1, 4)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82igx"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gou7"]
 albedo_color = Color(0.701961, 0.501961, 0.87451, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_vs5ul"]
-material = SubResource("StandardMaterial3D_82igx")
+[sub_resource type="BoxMesh" id="BoxMesh_8bxle"]
+material = SubResource("StandardMaterial3D_6gou7")
 size = Vector3(4, 1, 4)
 
 [node name="connector" type="StaticBody3D"]
 collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2)
-shape = SubResource("BoxShape3D_b4jpo")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("BoxMesh_vs5ul")
 
 [node name="connectors" type="Node3D" parent="."]
 
@@ -30,3 +23,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
 [node name="back" type="Node3D" parent="connectors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="spawns" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2)
+shape = SubResource("BoxShape3D_nvrlb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("BoxMesh_8bxle")

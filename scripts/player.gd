@@ -25,6 +25,9 @@ func _on_portal_entered():
 	speed += ACCEL
 
 func _process(_delta):
+	if self.global_position.y < gamebus.out_of_bounds_y:
+		print("dead")
+	
 	if Input.is_action_just_pressed("left"):
 		theta += PI / 2
 	if Input.is_action_just_pressed("right"):

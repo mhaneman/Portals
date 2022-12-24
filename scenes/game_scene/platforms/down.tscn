@@ -2,7 +2,7 @@
 
 [ext_resource type="ArrayMesh" uid="uid://bgsr2s53ql4me" path="res://assets/platforms/stair.obj" id="1_lyfbq"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6l410"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cm6v8"]
 points = PackedVector3Array(-2, 0, 0, 2, 0, 0, -2, 4, 8, 2, 4, 8, -2, -1, 0, 2, -1, 0, -2, 3, 8, 2, 3, 8)
 
 [node name="down" type="StaticBody3D"]
@@ -10,9 +10,35 @@ points = PackedVector3Array(-2, 0, 0, 2, 0, 0, -2, 4, 8, 2, 4, 8, -2, -1, 0, 2, 
 [node name="end_point" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 8)
 
+[node name="spawns" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
+
+[node name="Node3D2" type="Node3D" parent="spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5)
+
+[node name="Node3D3" type="Node3D" parent="spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+
+[node name="Node3D4" type="Node3D" parent="spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 3.5)
+
+[node name="Node3D5" type="Node3D" parent="spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 4.5)
+
+[node name="Node3D6" type="Node3D" parent="spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 5.5)
+
+[node name="Node3D7" type="Node3D" parent="spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 6.5)
+
+[node name="Node3D8" type="Node3D" parent="spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 7.5)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -4, 8)
-shape = SubResource("ConvexPolygonShape3D_6l410")
+shape = SubResource("ConvexPolygonShape3D_cm6v8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
