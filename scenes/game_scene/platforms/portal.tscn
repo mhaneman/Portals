@@ -1,21 +1,37 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbr2nye1e8cf0"]
+[gd_scene load_steps=8 format=3 uid="uid://cbr2nye1e8cf0"]
 
 [ext_resource type="Script" path="res://scripts/portal_area.gd" id="1_wmuhd"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_axmkc"]
-size = Vector3(4, 1, 4)
+[sub_resource type="BoxShape3D" id="BoxShape3D_wfmwb"]
+size = Vector3(4, 1, 8)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ufa7c"]
-size = Vector3(4, 1, 4)
+[sub_resource type="BoxMesh" id="BoxMesh_gmeet"]
+size = Vector3(4, 1, 8)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_bmrqq"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_mdrtt"]
 radius = 6.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4w4g"]
-albedo_color = Color(0, 0, 0, 1)
+[sub_resource type="Shader" id="Shader_hnivj"]
+code = "shader_type spatial;
 
-[sub_resource type="SphereMesh" id="SphereMesh_wnqwb"]
-material = SubResource("StandardMaterial3D_r4w4g")
+void vertex() {
+	VERTEX.y += sin((TIME * 2.0 + VERTEX.x) + (TIME * 1.0 + VERTEX.z)) * 0.1;
+}
+
+void fragment() {
+	vec3 color;
+	color.r = 0.0;
+	color.g = 0.0;
+	color.b = 0.0;
+	ALBEDO = color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v48xu"]
+render_priority = 0
+shader = SubResource("Shader_hnivj")
+
+[sub_resource type="SphereMesh" id="SphereMesh_qwa5k"]
+material = SubResource("ShaderMaterial_v48xu")
 radius = 6.0
 height = 12.0
 
@@ -28,22 +44,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 [node name="spawns" type="Node3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2)
-shape = SubResource("BoxShape3D_axmkc")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 4)
+shape = SubResource("BoxShape3D_wfmwb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("BoxMesh_ufa7c")
+mesh = SubResource("BoxMesh_gmeet")
 
 [node name="portal_area" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 11)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_wmuhd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="portal_area"]
-shape = SubResource("SphereShape3D_bmrqq")
+shape = SubResource("SphereShape3D_mdrtt")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="portal_area/CollisionShape3D"]
-mesh = SubResource("SphereMesh_wnqwb")
+mesh = SubResource("SphereMesh_qwa5k")
 
 [connection signal="body_entered" from="portal_area" to="portal_area" method="_on_body_entered"]

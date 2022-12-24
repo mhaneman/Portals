@@ -39,7 +39,6 @@ var instanced_connectors = []
 var instanced_items = []
 var current_end_point = Vector3.ZERO
 var current_rotation:float = 0
-var current_scale = Vector3.ONE
 
 @onready var gamebus = get_node("/root/gamebus")
 func _ready():
@@ -68,10 +67,10 @@ func add_item_to_path(scene, pos:Vector3):
 	
 func initalize_path():
 	for __ in range(3):
-		add_platform_to_path( flat_scene, Directions.straight, Vector3.ONE)
+		add_platform_to_path( flat_scene, Directions.straight, 1)
 		
 func finalize_path():
-	var final = add_platform_to_path(portal_scene, Directions.straight, Vector3.ONE)
+	var final = add_platform_to_path(portal_scene, Directions.straight, 1)
 	
 	if final.global_position.y < 0:
 		gamebus.out_of_bounds_y = final.global_position.y - 50
@@ -82,25 +81,25 @@ func generate_path(scenes):
 	for __ in range(gamebus.stage_number * 2 + 3):
 		add_random_platform(scenes)
 	
-# keep platform generation in area
+# have scale go down with more platforms
 func add_random_platform(scenes):
 	var direction:int = rng.randi_range(0, Directions.size() - 1)
 	var type:int = rng.randi_range(0, scenes.size() - 1)
-	var applied_scale = Vector3.ONE
+	var applied_scale:float = 1
 	var platform = add_platform_to_path(scenes[type], direction, applied_scale)
 	
 	# check distances here 
-	for i in instanced_platforms:
-		var dist = platform.global_position.distance_to(i.global_position)
-		if dist < MIN_DIST:
-			print(dist)
+	#for i in instanced_platforms:
+	#	var dist = platform.global_position.distance_to(i.global_position)
+	#	if dist < MIN_DIST:
+	#		pass
 
-func add_platform_to_path(scene, direction:Directions, applied_scale:Vector3):
+func add_platform_to_path(scene, direction:Directions, applied_scale:float):
 	var instance = scene.instantiate()
 	self.add_child(instance)
 	instanced_platforms.push_back(instance)
 	
-	instance.scale = applied_scale
+	instance.scale = Vector3(applied_scale, 1, 1)
 	
 	if direction == Directions.straight:
 		instance.global_position = current_end_point
@@ -111,6 +110,7 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:Vector3):
 	var connector = connector_scene.instantiate()
 	self.add_child(connector) 
 	instanced_connectors.push_back(connector)
+	connector.scale = Vector3(applied_scale, 1, applied_scale)
 	connector.global_position = current_end_point
 	connector.rotate_y(current_rotation) 
 	
@@ -143,7 +143,6 @@ func _on_portal_entered():
 	
 	current_end_point = Vector3.ZERO
 	current_rotation = 0
-	current_scale = Vector3.ONE
 	
 	gamebus.stage_number += 1
 		
