@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhgl54bwl8iwy"]
+[gd_scene load_steps=2 format=3 uid="uid://br8eb8jsaglye"]
 
-[ext_resource type="Script" path="res://scripts/stage_gen.gd" id="1_g688n"]
+[ext_resource type="Script" path="res://scripts/game/stage_gen.gd" id="1_kgl8o"]
 
 [node name="stage_gen" type="Node3D"]
-script = ExtResource("1_g688n")
+script = ExtResource("1_kgl8o")

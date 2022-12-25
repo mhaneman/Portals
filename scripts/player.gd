@@ -17,7 +17,7 @@ var direction = Vector2(0, 1)
 func _ready():
 	gamebus.portal_entered.connect(_on_portal_entered)
 	
-
+	
 func _on_portal_entered():
 	self.global_position = Vector3(0, 3, 3)
 	direction = Vector2(0, 1)
@@ -25,8 +25,11 @@ func _on_portal_entered():
 	speed += ACCEL
 
 func _process(_delta):
-	if self.global_position.y < gamebus.out_of_bounds_y:
-		print("dead")
+	if self.global_position.y < gamebus.out_of_bounds_y_pos:
+		self.global_position = Vector3(0, 3, 3)
+		direction = Vector2(0, 1)
+		theta = 0
+		gamebus.emit_signal("out_of_bounds_y")
 	
 	if Input.is_action_just_pressed("left"):
 		theta += PI / 2

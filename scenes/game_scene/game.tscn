@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c85be7yfutqhl"]
 
-[ext_resource type="PackedScene" uid="uid://bhgl54bwl8iwy" path="res://scenes/game_scene/stages/stage_gen.tscn" id="1_wivac"]
+[ext_resource type="Script" path="res://scripts/game/game.gd" id="1_dyyby"]
 [ext_resource type="PackedScene" uid="uid://brq1j7u1awgve" path="res://scenes/entites/player.tscn" id="2_gewwx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d3nad"]
@@ -18,8 +18,7 @@ tonemap_exposure = 0.9
 tonemap_white = 0.9
 
 [node name="Game" type="Node3D"]
-
-[node name="stage_gen" parent="." instance=ExtResource("1_wivac")]
+script = ExtResource("1_dyyby")
 
 [node name="Player" parent="." instance=ExtResource("2_gewwx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3)
