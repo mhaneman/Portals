@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://brq1j7u1awgve"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_u01ix"]
+[ext_resource type="Script" path="res://scripts/game/player.gd" id="1_u01ix"]
 [ext_resource type="PackedScene" uid="uid://f0q78gql5t3k" path="res://scenes/game_scene/ui/swipe_controls.tscn" id="2_agvtw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0f7li"]

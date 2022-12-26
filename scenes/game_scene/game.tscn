@@ -1,18 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://c85be7yfutqhl"]
+[gd_scene load_steps=7 format=3 uid="uid://c85be7yfutqhl"]
 
 [ext_resource type="Script" path="res://scripts/game/game.gd" id="1_dyyby"]
-[ext_resource type="PackedScene" uid="uid://brq1j7u1awgve" path="res://scenes/entites/player.tscn" id="2_gewwx"]
+[ext_resource type="PackedScene" path="res://scenes/entites/player.tscn" id="2_gewwx"]
+[ext_resource type="PackedScene" uid="uid://bxfxfjsxljie7" path="res://scenes/game_scene/ui/game_overlay.tscn" id="3_5c7q4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d3nad"]
 
-[sub_resource type="Sky" id="Sky_afo7d"]
+[sub_resource type="Sky" id="Sky_g2mfh"]
 sky_material = SubResource("ProceduralSkyMaterial_d3nad")
 
 [sub_resource type="Environment" id="Environment_fgtmc"]
 background_mode = 1
 background_color = Color(0.709804, 0.886275, 1, 1)
 background_energy_multiplier = 0.4
-sky = SubResource("Sky_afo7d")
+sky = SubResource("Sky_g2mfh")
 tonemap_mode = 3
 tonemap_exposure = 0.9
 tonemap_white = 0.9
@@ -33,3 +34,5 @@ environment = SubResource("Environment_fgtmc")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
+
+[node name="game_overlay" parent="." instance=ExtResource("3_5c7q4")]

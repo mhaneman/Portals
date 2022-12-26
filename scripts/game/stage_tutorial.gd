@@ -32,14 +32,18 @@ func tutorial():
 	add_item_to_path(notification_scene, p1.get_node("spawns").get_child(0).global_position)
 	
 	add_platform_to_path(flat_scene, Directions.left, 2)
-	add_platform_to_path(stair_scene, Directions.straight, 2)
-	
 	for __ in range(3):
 		add_platform_to_path(flat_scene, Directions.straight, 2)
-			
-	add_platform_to_path(flat_scene, Directions.left, 1)
+		
+	var p5 = add_platform_to_path(flat_scene, Directions.straight, 2)
+	add_item_to_path(notification_scene, p5.get_node("spawns").get_child(0).global_position)
+	
 	for __ in range(3):
 		add_platform_to_path(flat_scene, Directions.straight, 1)
+	
+	var p4 = add_platform_to_path(flat_scene, Directions.straight, 2)
+	add_item_to_path(notification_scene, p4.get_node("spawns").get_child(0).global_position)
+	
 	add_platform_to_path(flat_scene, Directions.right, 1)
 	
 	for __ in range(3):

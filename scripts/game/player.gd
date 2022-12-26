@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 
-const ROTATE_SPEED = 0.003
-const ACCEL = 0.5
+const ROTATE_SPEED = 0.0025
+const ACCEL = 0.2
 const MAX_ACCEL = 27
 
 # consider jump as a powerup item
@@ -23,13 +23,15 @@ func _on_portal_entered():
 	direction = Vector2(0, 1)
 	theta = 0
 	speed += ACCEL
+	
+func spawn_player():
+	self.global_position = Vector3(0, 3, 3)
+	direction = Vector2(0, 1)
+	theta = 0
 
 func _process(_delta):
 	if self.global_position.y < gamebus.out_of_bounds_y_pos:
-		self.global_position = Vector3(0, 3, 3)
-		direction = Vector2(0, 1)
-		theta = 0
-		gamebus.emit_signal("out_of_bounds_y")
+		spawn_player()
 	
 	if Input.is_action_just_pressed("left"):
 		theta += PI / 2
@@ -43,7 +45,8 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	# jump uses a single firework
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("jump") && gamebus.collected_fireworks > 0:
+		gamebus.collected_fireworks -= 1
 		velocity.y = JUMP_VELOCITY
 	
 	if Input.is_action_just_pressed("left"):
@@ -55,14 +58,3 @@ func _physics_process(delta):
 	velocity.z = direction.y * speed
 	
 	move_and_slide()
-
-
-func _on_swipe_controls_swiped(sig):
-	if sig == "jump":
-		velocity.y = JUMP_VELOCITY
-	if sig == "left":
-		direction = direction.rotated(-PI/2)
-	if sig == "right":
-		direction = direction.rotated(PI/2)
-	if sig == "down":
-		pass

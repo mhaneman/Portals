@@ -1,39 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2oddeq8h65wq"]
+[gd_scene load_steps=4 format=3 uid="uid://c2oddeq8h65wq"]
 
-[ext_resource type="Script" path="res://scripts/game/portal_area.gd" id="1_ea8ok"]
+[ext_resource type="PackedScene" uid="uid://cg65ivaxmfgo4" path="res://scenes/entites/portal_area.tscn" id="1_yadev"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_53dwh"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_pue65"]
 size = Vector3(4, 1, 8)
 
-[sub_resource type="BoxMesh" id="BoxMesh_5ul5y"]
+[sub_resource type="BoxMesh" id="BoxMesh_tqqb0"]
 size = Vector3(4, 1, 8)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_vh4wb"]
-radius = 6.0
-
-[sub_resource type="Shader" id="Shader_8tij3"]
-code = "shader_type spatial;
-
-void vertex() {
-	VERTEX.y += sin((TIME * 2.0 + VERTEX.x) + (TIME * 1.0 + VERTEX.z)) * 0.1;
-}
-
-void fragment() {
-	vec3 color;
-	color.r = 0.0;
-	color.g = 0.0;
-	color.b = 0.0;
-	ALBEDO = color;
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0dv4w"]
-render_priority = 0
-shader = SubResource("Shader_8tij3")
-
-[sub_resource type="SphereMesh" id="SphereMesh_7qnk5"]
-material = SubResource("ShaderMaterial_0dv4w")
-radius = 6.0
-height = 12.0
 
 [node name="portal" type="StaticBody3D"]
 collision_mask = 2
@@ -45,21 +18,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 4)
-shape = SubResource("BoxShape3D_53dwh")
+shape = SubResource("BoxShape3D_pue65")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("BoxMesh_5ul5y")
+mesh = SubResource("BoxMesh_tqqb0")
 
-[node name="portal_area" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 11)
-collision_layer = 8
-collision_mask = 2
-script = ExtResource("1_ea8ok")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="portal_area"]
-shape = SubResource("SphereShape3D_vh4wb")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="portal_area/CollisionShape3D"]
-mesh = SubResource("SphereMesh_7qnk5")
-
-[connection signal="body_entered" from="portal_area" to="portal_area" method="_on_body_entered"]
+[node name="portal_area" parent="." instance=ExtResource("1_yadev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 14)

@@ -1,4 +1,12 @@
-[gd_scene format=3 uid="uid://bxfxfjsxljie7"]
+[gd_scene load_steps=4 format=3 uid="uid://bxfxfjsxljie7"]
+
+[ext_resource type="Script" path="res://scripts/game/game_overlay.gd" id="1_p1f8w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_slnlx"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_7dobu"]
+font_size = 32
 
 [node name="game_overlay" type="Control"]
 layout_mode = 3
@@ -7,3 +15,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_p1f8w")
+
+[node name="coins" type="Label" parent="."]
+offset_left = 36.0
+offset_top = 40.0
+offset_right = 138.0
+offset_bottom = 88.0
+text = "Coins: "
+label_settings = SubResource("LabelSettings_slnlx")
+
+[node name="fireworks" type="Label" parent="."]
+offset_left = 36.0
+offset_top = 107.0
+offset_right = 205.0
+offset_bottom = 155.0
+text = "Fireworks: "
+label_settings = SubResource("LabelSettings_7dobu")

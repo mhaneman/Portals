@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://0gmh7oifsnkt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7u32b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_366nm"]
+albedo_color = Color(0, 0.741176, 0.352941, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_liapt"]
+material = SubResource("StandardMaterial3D_366nm")
+
+[node name="totem" type="Area3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_7u32b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("BoxMesh_liapt")

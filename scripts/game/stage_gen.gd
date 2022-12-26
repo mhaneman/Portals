@@ -18,6 +18,7 @@ var portal_scene = preload("res://scenes/game_scene/platforms/portal.tscn")
 # item scenes
 var coin_scene = preload("res://scenes/game_scene/items/coin.tscn")
 var firework_scene = preload("res://scenes/game_scene/items/firework.tscn")
+var totem_scene = preload("res://scenes/game_scene/items/totem.tscn")
 
 	
 var down_scenes = [
@@ -48,16 +49,27 @@ func _ready():
 	
 func generator():
 	initalize_path()
-	generate_path(down_scenes)
+	if rng.randi_range(0, 3) != 0:
+		generate_path(down_scenes)
+	else:
+		generate_path(up_scenes)
+		
 	finalize_path()
 	
 	for i in instanced_connectors:
-		for j in i.get_node("spawns").get_children():
-			add_item_to_path(firework_scene, j.global_position)
+		var rand = rng.randi_range(0, 1000)
+		if rand < 5:
+			for j in i.get_node("spawns").get_children():
+				add_item_to_path(totem_scene, j.global_position)
+		elif rand < 50:
+			for j in i.get_node("spawns").get_children():
+				add_item_to_path(firework_scene, j.global_position)
+			
 			
 	for i in instanced_platforms:
-		for j in i.get_node("spawns").get_children():
-			add_item_to_path(coin_scene, j.global_position)
+		if rng.randi_range(0, 3) == 0:
+			for j in i.get_node("spawns").get_children():
+				add_item_to_path(coin_scene, j.global_position)
 			
 func add_item_to_path(item_scene, pos:Vector3):
 	var instance = item_scene.instantiate()
@@ -76,6 +88,12 @@ func finalize_path():
 		gamebus.out_of_bounds_y_pos = final.global_position.y - 50
 	else:
 		gamebus.out_of_bounds_y_pos = -50
+	
+	if final.global_position.x > final.global_position.z:
+		gamebus.out_of_bounds_xz_pos = final.global_position.x + 100
+	else:
+		gamebus.out_of_bounds_xz_pos = final.global_position.z + 100
+		
 	
 func generate_path(scenes):
 	for __ in range(gamebus.stage_number * 2 + 3):

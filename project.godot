@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Portals"
-run/main_scene="res://scenes/game_scene/game.tscn"
+run/main_scene="res://scenes/menu_scene/menu.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 

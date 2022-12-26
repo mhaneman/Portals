@@ -1,7 +1,60 @@
-[gd_scene format=3 uid="uid://bvedmtxc2vo6"]
+[gd_scene load_steps=11 format=3 uid="uid://bvedmtxc2vo6"]
 
-[node name="menu" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[ext_resource type="PackedScene" uid="uid://cg65ivaxmfgo4" path="res://scenes/entites/portal_area.tscn" id="1_0goj8"]
+[ext_resource type="Script" path="res://scripts/menu/menu.gd" id="1_wwbac"]
+[ext_resource type="PackedScene" uid="uid://k7qbup211sue" path="res://scenes/menu_scene/ui/menu_overlay.tscn" id="2_mko0d"]
+[ext_resource type="PackedScene" uid="uid://c73ucoibs10a8" path="res://scenes/menu_scene/player.tscn" id="3_rfky1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fwqn5"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjmwp"]
+albedo_color = Color(0.376471, 0.639216, 0.462745, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fpnjo"]
+material = SubResource("StandardMaterial3D_jjmwp")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cd76v"]
+
+[sub_resource type="Sky" id="Sky_afo7d"]
+sky_material = SubResource("ProceduralSkyMaterial_cd76v")
+
+[sub_resource type="Environment" id="Environment_4wobw"]
+background_mode = 1
+background_color = Color(0.709804, 0.886275, 1, 1)
+background_energy_multiplier = 0.4
+sky = SubResource("Sky_afo7d")
+tonemap_mode = 3
+tonemap_exposure = 0.9
+tonemap_white = 0.9
+
+[node name="menu" type="Node3D"]
+script = ExtResource("1_wwbac")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_fwqn5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_fpnjo")
+
+[node name="portal_area" parent="." instance=ExtResource("1_0goj8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.823136, 0.200718, 0.531186, 0, 0.935444, -0.353475, -0.567844, 0.290958, 0.769998, 6, 0.213449, 8)
+
+[node name="player" parent="." instance=ExtResource("3_rfky1")]
+
+[node name="Envi" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4wobw")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
+
+[node name="menu_overlay" parent="." instance=ExtResource("2_mko0d")]
+grow_horizontal = 2
+grow_vertical = 2
