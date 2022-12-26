@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-const JUMP_VELOCITY = 20.0
+const JUMP_VELOCITY = 15.0
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 

@@ -42,12 +42,13 @@ shape = SubResource("BoxShape3D_fwqn5")
 mesh = SubResource("BoxMesh_fpnjo")
 
 [node name="portal_area" parent="." instance=ExtResource("1_0goj8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.823136, 0.200718, 0.531186, 0, 0.935444, -0.353475, -0.567844, 0.290958, 0.769998, 6, 0.213449, 8)
+transform = Transform3D(0.823136, 0, 0.567844, 0, 1, 0, -0.567844, 0, 0.823136, 6, 2, 8)
 
 [node name="player" parent="." instance=ExtResource("3_rfky1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Envi" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4wobw")
@@ -56,5 +57,3 @@ environment = SubResource("Environment_4wobw")
 transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
 
 [node name="menu_overlay" parent="." instance=ExtResource("2_mko0d")]
-grow_horizontal = 2
-grow_vertical = 2
