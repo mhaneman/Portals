@@ -2,7 +2,7 @@
 
 [ext_resource type="ArrayMesh" uid="uid://bgsr2s53ql4me" path="res://assets/platforms/stair.obj" id="1_lyfbq"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_teslv"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1ii24"]
 points = PackedVector3Array(-2, 0, 0, 2, 0, 0, -2, 4, 8, 2, 4, 8, -2, -1, 0, 2, -1, 0, -2, 3, 8, 2, 3, 8)
 
 [node name="down" type="StaticBody3D"]
@@ -38,7 +38,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 7.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -4, 8)
-shape = SubResource("ConvexPolygonShape3D_teslv")
+shape = SubResource("ConvexPolygonShape3D_1ii24")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

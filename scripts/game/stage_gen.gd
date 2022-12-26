@@ -103,7 +103,7 @@ func generate_path(scenes):
 func add_random_platform(scenes):
 	var direction:int = rng.randi_range(0, Directions.size() - 1)
 	var type:int = rng.randi_range(0, scenes.size() - 1)
-	var applied_scale:float = 1
+	var applied_scale:float = 1.5
 	var platform = add_platform_to_path(scenes[type], direction, applied_scale)
 	
 	# check distances here 
