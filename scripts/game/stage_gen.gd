@@ -42,6 +42,10 @@ var current_end_point = Vector3.ZERO
 var current_rotation:float = 0
 
 @onready var gamebus = get_node("/root/gamebus")
+@onready var base_scale:float = 1.5
+
+
+
 func _ready():
 	gamebus.portal_entered.connect(_on_portal_entered)
 	
@@ -61,7 +65,7 @@ func generator():
 		if rand < 5:
 			for j in i.get_node("spawns").get_children():
 				add_item_to_path(totem_scene, j.global_position)
-		elif rand < 50:
+		elif rand < 120:
 			for j in i.get_node("spawns").get_children():
 				add_item_to_path(firework_scene, j.global_position)
 			
@@ -79,21 +83,15 @@ func add_item_to_path(item_scene, pos:Vector3):
 	
 func initalize_path():
 	for __ in range(3):
-		add_platform_to_path( flat_scene, Directions.straight, 1)
+		add_platform_to_path( flat_scene, Directions.straight, base_scale)
 		
 func finalize_path():
-	var final = add_platform_to_path(portal_scene, Directions.straight, 1)
+	var final = add_platform_to_path(portal_scene, Directions.straight, 1.0)
 	
 	if final.global_position.y < 0:
 		gamebus.out_of_bounds_y_pos = final.global_position.y - 50
 	else:
 		gamebus.out_of_bounds_y_pos = -50
-	
-	if final.global_position.x > final.global_position.z:
-		gamebus.out_of_bounds_xz_pos = final.global_position.x + 100
-	else:
-		gamebus.out_of_bounds_xz_pos = final.global_position.z + 100
-		
 	
 func generate_path(scenes):
 	for __ in range(gamebus.stage_number * 2 + 3):
@@ -103,8 +101,7 @@ func generate_path(scenes):
 func add_random_platform(scenes):
 	var direction:int = rng.randi_range(0, Directions.size() - 1)
 	var type:int = rng.randi_range(0, scenes.size() - 1)
-	var applied_scale:float = 1.5
-	var platform = add_platform_to_path(scenes[type], direction, applied_scale)
+	var platform = add_platform_to_path(scenes[type], direction, base_scale)
 	
 	# check distances here 
 	#for i in instanced_platforms:
@@ -163,5 +160,6 @@ func _on_portal_entered():
 	current_rotation = 0
 	
 	gamebus.stage_number += 1
+	base_scale = clampf(1.5 - gamebus.stage_number * 0.05, 0.8, 1.5)
 		
 	generator()

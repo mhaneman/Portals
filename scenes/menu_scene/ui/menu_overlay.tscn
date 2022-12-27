@@ -1,4 +1,12 @@
-[gd_scene format=3 uid="uid://k7qbup211sue"]
+[gd_scene load_steps=4 format=3 uid="uid://k7qbup211sue"]
+
+[ext_resource type="Script" path="res://scripts/menu/menu_overlay.gd" id="1_s2l0w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_unq8d"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_87fds"]
+font_size = 64
 
 [node name="menu_overlay" type="Control"]
 layout_mode = 3
@@ -7,8 +15,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_s2l0w")
 
 [node name="settings" type="MenuButton" parent="."]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 32.0
 offset_right = 99.0
@@ -21,6 +31,7 @@ popup/item_1/text = "controls"
 popup/item_1/id = 1
 
 [node name="tutorial" type="CheckButton" parent="."]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -29,5 +40,62 @@ offset_top = 39.0
 offset_right = -46.0
 offset_bottom = 70.0
 grow_horizontal = 0
+focus_mode = 0
 button_pressed = true
 text = "tutorial?"
+
+[node name="mode" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="mode"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.525
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -99.0
+offset_right = 49.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "mode:"
+label_settings = SubResource("LabelSettings_unq8d")
+
+[node name="game_mode_label" type="Label" parent="mode"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.5
+offset_top = -45.5
+offset_right = 141.5
+offset_bottom = 45.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Standard"
+label_settings = SubResource("LabelSettings_87fds")
+
+[node name="coins" type="Label" parent="."]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 36.0
+offset_right = 353.0
+offset_bottom = 62.0
+text = "coins: 99999999999999999"
+
+[connection signal="pressed" from="tutorial" to="." method="_on_tutorial_pressed"]

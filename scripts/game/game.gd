@@ -12,11 +12,16 @@ var i = 0
 func _ready():
 	gamebus.portal_entered.connect(_on_portal_entered)
 	
-	tutorial = tutorial_gen.instantiate()
-	self.add_child(tutorial)
+	if gamebus.play_tutorial:
+		tutorial = tutorial_gen.instantiate()
+		self.add_child(tutorial)
+	else:
+		stage = stage_gen.instantiate()
+		self.add_child(stage)
 	
+# what an awful way to program this... NEED TO REFACTOR!!!
 func _on_portal_entered():
-	if i == 0:
+	if i == 0 and gamebus.play_tutorial:
 		tutorial.queue_free()
 		stage = stage_gen.instantiate()
 		self.add_child(stage)
