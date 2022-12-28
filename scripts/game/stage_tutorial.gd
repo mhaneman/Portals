@@ -100,17 +100,4 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float):
 	return instance
 	
 func _on_portal_entered():
-	for i in instanced_platforms:
-		i.queue_free()
-	instanced_platforms.clear()
-	
-	for i in instanced_connectors:
-		i.queue_free()
-	instanced_connectors.clear()
-	
-	for i in instanced_items:
-		i.queue_free()
-	instanced_items.clear()
-	
-	current_end_point = Vector3.ZERO
-	current_rotation = 0
+	gamebus.stage_number += 1

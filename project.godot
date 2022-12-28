@@ -8,6 +8,16 @@
 
 config_version=5
 
+_global_script_classes=[{
+"base": "Node",
+"class": &"StageBuilder",
+"language": &"GDScript",
+"path": "res://scripts/game/objects/stage_builder.gd"
+}]
+_global_script_class_icons={
+"StageBuilder": ""
+}
+
 [application]
 
 config/name="Portals"
