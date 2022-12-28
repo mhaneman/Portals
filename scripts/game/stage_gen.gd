@@ -53,10 +53,14 @@ func _ready():
 	
 func generator():
 	initalize_path()
-	if rng.randi_range(0, 3) != 0:
-		generate_path(down_scenes)
-	else:
-		generate_path(up_scenes)
+	
+	var scenes = [up_scenes, down_scenes]
+	var chosen
+	for i in gamebus.stage_number + 3:
+		if i % 10 == 0:
+			print("choose")
+			chosen = rng.randi_range(0, 1)
+		generate_path(scenes[chosen])
 		
 	finalize_path()
 	
@@ -94,20 +98,46 @@ func finalize_path():
 		gamebus.out_of_bounds_y_pos = -50
 	
 func generate_path(scenes):
-	for __ in range(gamebus.stage_number * 2 + 3):
+	# for __ in range(gamebus.stage_number + 3):
+	#	add_random_platform(scenes)
+	
+	var rand = rng.randi_range(0, 1000)
+	if rand < 300:
+		add_random_spiral(scenes)
+	elif rand < 700:
+		add_random_straight(scenes)
+	else:
 		add_random_platform(scenes)
+		
+func add_random_straight(scenes):
+	var pieces = rng.randi_range(2, 4)
+	var type:int = rng.randi_range(0, scenes.size() - 1)
+	add_platform_to_path(scenes[type], Directions.straight, base_scale)
+	
+		
+func add_random_spiral(scenes):
+	var direction = Directions.left if rng.randi_range(0, 1) else Directions.right
+	var pieces = rng.randi_range(2, 6)
+	var type:int = rng.randi_range(0, scenes.size() - 1)
+	
+	for __ in pieces:
+		if rng.randi_range(0, 1):
+			add_platform_to_path(scenes[type], direction, base_scale)
+		else:
+			add_platform_to_path(scenes[type], Directions.straight, base_scale)
+	
 	
 # have scale go down with more platforms
 func add_random_platform(scenes):
 	var direction:int = rng.randi_range(0, Directions.size() - 1)
 	var type:int = rng.randi_range(0, scenes.size() - 1)
-	var platform = add_platform_to_path(scenes[type], direction, base_scale)
+	add_platform_to_path(scenes[type], direction, base_scale)
 	
-	# check distances here 
-	#for i in instanced_platforms:
-	#	var dist = platform.global_position.distance_to(i.global_position)
-	#	if dist < MIN_DIST:
-	#		pass
+
+func add_platform(scene, direction:Directions, applied_scale:float):
+	var platform = add_platform_to_path(scene, direction, applied_scale)
+	# add platform collision detection
+	
 
 func add_platform_to_path(scene, direction:Directions, applied_scale:float):
 	var instance = scene.instantiate()
