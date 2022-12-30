@@ -55,3 +55,9 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float):
 	instance.rotate_y(current_rotation)
 	current_end_point = instance.get_node("end_point").global_position
 	return instance
+	
+func add_item_to_path(item_scene, platform):
+	var instance = item_scene.instantiate()
+	self.add_child(instance)
+	instance.global_position = platform.global_position
+	instanced_items.push_back(instance)
