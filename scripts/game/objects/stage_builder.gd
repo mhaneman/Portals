@@ -56,8 +56,12 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float):
 	current_end_point = instance.get_node("end_point").global_position
 	return instance
 	
-func add_item_to_path(item_scene, platform):
+func add_item_to_pos(item_scene, pos:Vector3):
 	var instance = item_scene.instantiate()
 	self.add_child(instance)
-	instance.global_position = platform.global_position
+	instance.global_position = pos
 	instanced_items.push_back(instance)
+	
+func add_items_to_platform(item_scene, platform):
+	for j in platform.get_node("spawns").get_children():
+				add_item_to_pos(item_scene, j.global_position)

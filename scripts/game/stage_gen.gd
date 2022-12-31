@@ -13,13 +13,17 @@ var totem_scene = preload("res://scenes/game_scene/items/totem.tscn")
 
 var down_scenes = [
 	flat_scene,
-	down_scene
+	down_scene,
 ]
 
 var up_scenes = [
 	flat_scene,
-	stair_scene
+	stair_scene,
 ]
+
+const INIT_PLAT_SIZE:float = 2.0
+const MIN_PLAT_SIZE:float = 0.6
+const OOB_DISPL:float = -50.0
 
 @onready var gamebus = get_node("/root/gamebus")
 
@@ -28,7 +32,9 @@ func _ready():
 	generate()
 	
 func generate():
-	initalize_path()
+	# initalize path
+	for __ in range(3):
+		add_platform_to_path(flat_scene, Directions.straight, base_scale)
 	
 	var chosen
 	for i in gamebus.stage_number + 3:
@@ -40,32 +46,27 @@ func generate():
 	generate_items()
 
 func generate_items():
+	# refactor nested loops
 	for i in instanced_connectors:
 		var rand = rng.randi_range(0, 1000)
 		if rand < 5:
-			for j in i.get_node("spawns").get_children():
-				add_item_to_path(totem_scene, j)
+			add_items_to_platform(totem_scene, i)
 		elif rand < 120:
-			for j in i.get_node("spawns").get_children():
-				add_item_to_path(firework_scene, j)
+			add_items_to_platform(firework_scene, i)
 			
-
 	for i in instanced_platforms:
 		if rng.randi_range(0, 3) == 0:
-			for j in i.get_node("spawns").get_children():
-				add_item_to_path(coin_scene, j)
+			add_items_to_platform(coin_scene, i)
 	
-func initalize_path():
-	for __ in range(3):
-		add_platform_to_path( flat_scene, Directions.straight, base_scale)
-		
+
 func finalize_path():
 	var final = add_platform_to_path(portal_scene, Directions.straight, 1.0)
 	
+	#need to fix this since we now go up and down ...
 	if final.global_position.y < 0:
-		gamebus.out_of_bounds_y_pos = final.global_position.y - 50
+		gamebus.out_of_bounds_y_pos = final.global_position.y + OOB_DISPL
 	else:
-		gamebus.out_of_bounds_y_pos = -50
+		gamebus.out_of_bounds_y_pos = OOB_DISPL
 	
 func generate_path(scenes):
 	var rand = rng.randi_range(0, 1000)
@@ -92,8 +93,9 @@ func add_random_spiral(scenes):
 		else:
 			add_platform_to_path(scenes[type], Directions.straight, base_scale)
 	
-#signals 
+# signals 
 func _on_portal_entered():
-	
 	gamebus.stage_number += 1
-	gamebus.base_scale = clampf(1.5 - gamebus.stage_number * 0.05, 0.8, 1.5)
+	gamebus.base_scale = clampf( \
+		INIT_PLAT_SIZE - gamebus.stage_number * 0.05, \
+		MIN_PLAT_SIZE, INIT_PLAT_SIZE)
