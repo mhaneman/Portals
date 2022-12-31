@@ -15,6 +15,7 @@ var current_rotation:float = 0
 var base_scale = 1
 
 var connector_scene = preload("res://scenes/game_scene/platforms/connector.tscn")
+var portal_scene = preload("res://scenes/game_scene/platforms/portal.tscn")
 
 # constructor
 func _init():

@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ytwihc0drhk0"]
+[gd_scene load_steps=5 format=3 uid="uid://ytwihc0drhk0"]
 
 [ext_resource type="ArrayMesh" uid="uid://bgsr2s53ql4me" path="res://assets/platforms/stair.obj" id="1_lyfbq"]
 [ext_resource type="Material" uid="uid://dbix3ce20q7g1" path="res://assets/platforms/platform_accent_material.tres" id="2_gbntb"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xh2i8"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1ubgp"]
 points = PackedVector3Array(-2, 0, 0, 2, 0, 0, -2, 4, 8, 2, 4, 8, -2, -1, 0, 2, -1, 0, -2, 3, 8, 2, 3, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l5e1j"]
+size = Vector3(8, 12, 8)
 
 [node name="down" type="StaticBody3D"]
 
@@ -39,9 +42,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 7.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -4, 8)
-shape = SubResource("ConvexPolygonShape3D_xh2i8")
+shape = SubResource("ConvexPolygonShape3D_1ubgp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 mesh = ExtResource("1_lyfbq")
 surface_material_override/0 = ExtResource("2_gbntb")
+
+[node name="spacing" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="spacing"]
+shape = SubResource("BoxShape3D_l5e1j")

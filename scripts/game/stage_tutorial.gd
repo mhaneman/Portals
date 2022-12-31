@@ -4,7 +4,6 @@ var flat_scene = preload("res://scenes/game_scene/platforms/flat.tscn")
 var stair_scene = preload("res://scenes/game_scene/platforms/stair.tscn")
 var down_scene = preload("res://scenes/game_scene/platforms/down.tscn")
 var gap_scene = preload("res://scenes/game_scene/platforms/gap.tscn")
-var portal_scene = preload("res://scenes/game_scene/platforms/portal.tscn")
 
 var firework_scene = preload("res://scenes/game_scene/items/firework.tscn")
 var coin_scene = preload("res://scenes/game_scene/items/coin.tscn")

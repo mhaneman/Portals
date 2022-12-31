@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://do4kvuf42uomu"]
+[gd_scene load_steps=5 format=3 uid="uid://do4kvuf42uomu"]
 
 [ext_resource type="Material" uid="uid://cu1lesfx7w4hc" path="res://assets/platforms/platform_material.tres" id="1_x4e58"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qv3np"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_op0n8"]
 size = Vector3(4, 1, 12)
 
-[sub_resource type="BoxMesh" id="BoxMesh_suaov"]
+[sub_resource type="BoxMesh" id="BoxMesh_73h6k"]
 material = ExtResource("1_x4e58")
 size = Vector3(4, 1, 12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dalec"]
+size = Vector3(8, 12, 12)
 
 [node name="Flat" type="StaticBody3D"]
 collision_mask = 2
@@ -55,8 +58,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 6)
-shape = SubResource("BoxShape3D_qv3np")
+shape = SubResource("BoxShape3D_op0n8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("BoxMesh_suaov")
+mesh = SubResource("BoxMesh_73h6k")
 skeleton = NodePath("../..")
+
+[node name="spacing" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="spacing"]
+shape = SubResource("BoxShape3D_dalec")

@@ -4,7 +4,6 @@ extends StageBuilder
 var flat_scene = preload("res://scenes/game_scene/platforms/flat.tscn")
 var stair_scene = preload("res://scenes/game_scene/platforms/stair.tscn")
 var down_scene = preload("res://scenes/game_scene/platforms/down.tscn")
-var portal_scene = preload("res://scenes/game_scene/platforms/portal.tscn")
 
 # item scenes
 var coin_scene = preload("res://scenes/game_scene/items/coin.tscn")
