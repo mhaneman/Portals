@@ -1,16 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0iy0r2l8b324"]
+[gd_scene load_steps=5 format=3 uid="uid://b0iy0r2l8b324"]
 
+[ext_resource type="Script" path="res://scripts/game/objects/connector.gd" id="1_yba75"]
 [ext_resource type="Material" uid="uid://cu1lesfx7w4hc" path="res://assets/platforms/platform_material.tres" id="1_yjjum"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_uvl42"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_3gg12"]
 size = Vector3(4, 1, 4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_87db5"]
+[sub_resource type="BoxMesh" id="BoxMesh_sigk2"]
 material = ExtResource("1_yjjum")
 size = Vector3(4, 1, 4)
 
 [node name="connector" type="StaticBody3D"]
-collision_mask = 2
+collision_layer = 4
+script = ExtResource("1_yba75")
 
 [node name="connectors" type="Node3D" parent="."]
 
@@ -30,7 +32,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2)
-shape = SubResource("BoxShape3D_uvl42")
+shape = SubResource("BoxShape3D_3gg12")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("BoxMesh_87db5")
+mesh = SubResource("BoxMesh_sigk2")

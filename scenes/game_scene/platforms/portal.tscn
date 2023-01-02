@@ -1,22 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2oddeq8h65wq"]
 
+[ext_resource type="Script" path="res://scripts/game/objects/platform.gd" id="1_gg4dp"]
 [ext_resource type="PackedScene" uid="uid://cg65ivaxmfgo4" path="res://scenes/entites/portal_area.tscn" id="1_yadev"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_42pau"]
-radius = 6.0
+[node name="portal" type="StaticBody3D"]
+script = ExtResource("1_gg4dp")
 
-[node name="portal" type="Node3D"]
+[node name="points" type="Node3D" parent="."]
 
-[node name="end_point" type="Node3D" parent="."]
+[node name="end" type="Node3D" parent="points"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
 
 [node name="spawns" type="Node3D" parent="."]
-
-[node name="spacing" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 6)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="spacing"]
-shape = SubResource("SphereShape3D_42pau")
 
 [node name="portal_area" parent="." instance=ExtResource("1_yadev")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 6)

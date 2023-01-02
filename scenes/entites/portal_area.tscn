@@ -31,7 +31,6 @@ height = 12.0
 
 [node name="portal_area" type="Area3D"]
 collision_layer = 8
-collision_mask = 2
 script = ExtResource("1_mu1e7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

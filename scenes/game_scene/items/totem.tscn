@@ -1,17 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://0gmh7oifsnkt"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2fdlq"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_2m6bh"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fu5vi"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jsvdv"]
 albedo_color = Color(0, 0.741176, 0.352941, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_6trpb"]
-material = SubResource("StandardMaterial3D_fu5vi")
+[sub_resource type="BoxMesh" id="BoxMesh_6268b"]
+material = SubResource("StandardMaterial3D_jsvdv")
 
 [node name="totem" type="Area3D"]
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_2fdlq")
+shape = SubResource("BoxShape3D_2m6bh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("BoxMesh_6trpb")
+mesh = SubResource("BoxMesh_6268b")

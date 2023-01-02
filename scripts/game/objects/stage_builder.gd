@@ -36,7 +36,7 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float):
 	if direction == Directions.straight:
 		instance.global_position = current_end_point
 		instance.rotate_y(current_rotation)
-		current_end_point = instance.get_node("end_point").global_position
+		current_end_point = instance.end_point.global_position
 		return instance
 		
 	var connector = connector_scene.instantiate()
@@ -47,14 +47,14 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float):
 	connector.rotate_y(current_rotation) 
 	
 	if direction == Directions.left:
-		instance.global_position = connector.get_node("connectors/left").global_position
+		instance.global_position = connector.left_connector.global_position
 		current_rotation += PI / 2
 	elif direction == Directions.right:
-		instance.global_position = connector.get_node("connectors/right").global_position
+		instance.global_position = connector.right_connector.global_position
 		current_rotation += -PI / 2
 		
 	instance.rotate_y(current_rotation)
-	current_end_point = instance.get_node("end_point").global_position
+	current_end_point = instance.end_point.global_position
 	return instance
 	
 func add_item_to_pos(item_scene, pos:Vector3):
@@ -64,5 +64,5 @@ func add_item_to_pos(item_scene, pos:Vector3):
 	instanced_items.push_back(instance)
 	
 func add_items_to_platform(item_scene, platform):
-	for j in platform.get_node("spawns").get_children():
+	for j in platform.spawns.get_children():
 				add_item_to_pos(item_scene, j.global_position)

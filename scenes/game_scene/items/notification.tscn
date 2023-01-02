@@ -2,20 +2,19 @@
 
 [ext_resource type="Script" path="res://scripts/game/notification.gd" id="1_r2aqk"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2hgnq"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_vjtng"]
 size = Vector3(8, 8, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_vfary"]
+[sub_resource type="LabelSettings" id="LabelSettings_f3e00"]
 font_size = 64
 font_color = Color(0.309804, 0.372549, 0.858824, 1)
 
 [node name="notification" type="Area3D"]
-collision_layer = 8
-collision_mask = 2
+collision_layer = 2
 script = ExtResource("1_r2aqk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_2hgnq")
+shape = SubResource("BoxShape3D_vjtng")
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8
@@ -30,7 +29,7 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Notification"
-label_settings = SubResource("LabelSettings_vfary")
+label_settings = SubResource("LabelSettings_f3e00")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
