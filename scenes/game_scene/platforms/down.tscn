@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/game/objects/platform.gd" id="1_scdpp"]
 [ext_resource type="Material" uid="uid://dbix3ce20q7g1" path="res://assets/platforms/platform_accent_material.tres" id="2_gbntb"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5jdad"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yt7yo"]
 points = PackedVector3Array(-2, 0, 0, 2, 0, 0, -2, 4, 8, 2, 4, 8, -2, -1, 0, 2, -1, 0, -2, 3, 8, 2, 3, 8)
 
 [node name="down" type="StaticBody3D"]
@@ -46,7 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 7.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -4, 8)
-shape = SubResource("ConvexPolygonShape3D_5jdad")
+shape = SubResource("ConvexPolygonShape3D_yt7yo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

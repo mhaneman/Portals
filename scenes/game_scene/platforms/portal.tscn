@@ -4,9 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://cg65ivaxmfgo4" path="res://scenes/entites/portal_area.tscn" id="1_yadev"]
 
 [node name="portal" type="StaticBody3D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_gg4dp")
 
 [node name="points" type="Node3D" parent="."]
+
+[node name="start" type="Node3D" parent="points"]
 
 [node name="end" type="Node3D" parent="points"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)

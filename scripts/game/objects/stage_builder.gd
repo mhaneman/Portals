@@ -4,7 +4,7 @@ class_name StageBuilder
 var rng = RandomNumberGenerator.new()
 
 enum Directions {straight, left, right}
-const MIN_DIST:float = 6
+const MIN_DIST:float = 10
 
 var instanced_platforms = []
 var instanced_connectors = []
@@ -30,13 +30,13 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float):
 	var instance = scene.instantiate()
 	self.add_child(instance)
 	instanced_platforms.push_back(instance)
-	
 	instance.scale = Vector3(applied_scale, 1, 1)
 	
 	if direction == Directions.straight:
 		instance.global_position = current_end_point
 		instance.rotate_y(current_rotation)
 		current_end_point = instance.end_point.global_position
+		check_overlap(instance)
 		return instance
 		
 	var connector = connector_scene.instantiate()
@@ -57,6 +57,11 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float):
 	current_end_point = instance.end_point.global_position
 	return instance
 	
+func check_overlap(plat):
+	for i in instanced_platforms:
+		if plat.end_point.global_position.distance_to(i.start_point.global_position) < MIN_DIST:
+			print("too close")
+	
 func add_item_to_pos(item_scene, pos:Vector3):
 	var instance = item_scene.instantiate()
 	self.add_child(instance)
@@ -65,4 +70,4 @@ func add_item_to_pos(item_scene, pos:Vector3):
 	
 func add_items_to_platform(item_scene, platform):
 	for j in platform.spawns.get_children():
-				add_item_to_pos(item_scene, j.global_position)
+		add_item_to_pos(item_scene, j.global_position)

@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scripts/game/objects/platform.gd" id="1_7ngeb"]
 [ext_resource type="Material" uid="uid://cu1lesfx7w4hc" path="res://assets/platforms/platform_material.tres" id="1_x4e58"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2878j"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_2hc5s"]
 size = Vector3(4, 1, 12)
 
-[sub_resource type="BoxMesh" id="BoxMesh_6yp84"]
+[sub_resource type="BoxMesh" id="BoxMesh_ajtmm"]
 material = ExtResource("1_x4e58")
 size = Vector3(4, 1, 12)
 
@@ -61,8 +61,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 11.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 6)
-shape = SubResource("BoxShape3D_2878j")
+shape = SubResource("BoxShape3D_2hc5s")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("BoxMesh_6yp84")
+mesh = SubResource("BoxMesh_ajtmm")
 skeleton = NodePath("../..")
