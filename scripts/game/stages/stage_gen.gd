@@ -33,16 +33,18 @@ func _ready():
 func generate():
 	# initalize path
 	for __ in range(3):
-		add_platform_to_path(flat_scene, Directions.straight, base_scale)
+		await add_platform_to_path(flat_scene, Directions.straight, base_scale)
 	
+	await generate_with_direction()
+	finalize_path()
+	generate_items()
+	
+func generate_with_direction():
 	var chosen
 	for i in gamebus.stage_number + 3:
 		if i % 10 == 0:
 			chosen = down_scenes if rng.randi_range(0, 1) else up_scenes
-		generate_path(chosen)
-		
-	finalize_path()
-	generate_items()
+		await generate_path(chosen)
 
 func generate_items():
 	# refactor nested loops
@@ -59,7 +61,7 @@ func generate_items():
 	
 
 func finalize_path():
-	var final = add_platform_to_path(portal_scene, Directions.straight, 1.0)
+	var final = await add_platform_to_path(portal_scene, Directions.straight, 1.0)
 	
 	#need to fix this since we now go up and down ...
 	if final.global_position.y < 0:
@@ -70,15 +72,15 @@ func finalize_path():
 func generate_path(scenes):
 	var rand = rng.randi_range(0, 1000)
 	if rand < 300:
-		add_random_spiral(scenes)
+		await add_random_spiral(scenes)
 	elif rand < 700:
-		add_random_straight(scenes)
+		await add_random_straight(scenes)
 	else:
-		add_random_platform(scenes)
+		await add_random_platform(scenes)
 		
 func add_random_straight(scenes):
 	var type:int = rng.randi_range(0, scenes.size() - 1)
-	add_platform_to_path(scenes[type], Directions.straight, base_scale)
+	await add_platform_to_path(scenes[type], Directions.straight, base_scale)
 	
 		
 func add_random_spiral(scenes):
@@ -88,9 +90,9 @@ func add_random_spiral(scenes):
 	
 	for __ in pieces:
 		if rng.randi_range(0, 1):
-			add_platform_to_path(scenes[type], direction, base_scale)
+			await add_platform_to_path(scenes[type], direction, base_scale)
 		else:
-			add_platform_to_path(scenes[type], Directions.straight, base_scale)
+			await add_platform_to_path(scenes[type], Directions.straight, base_scale)
 	
 # signals 
 func _on_portal_entered():

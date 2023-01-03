@@ -36,7 +36,8 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float):
 		instance.global_position = current_end_point
 		instance.rotate_y(current_rotation)
 		current_end_point = instance.end_point.global_position
-		check_overlap(instance)
+		if await instance.has_overlapping():
+			print("overlapping")
 		return instance
 		
 	var connector = connector_scene.instantiate()
@@ -55,12 +56,9 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float):
 		
 	instance.rotate_y(current_rotation)
 	current_end_point = instance.end_point.global_position
+	if await instance.has_overlapping():
+		print("overlapping")
 	return instance
-	
-func check_overlap(plat):
-	for i in instanced_platforms:
-		if plat.end_point.global_position.distance_to(i.start_point.global_position) < MIN_DIST:
-			print("too close")
 	
 func add_item_to_pos(item_scene, pos:Vector3):
 	var instance = item_scene.instantiate()
