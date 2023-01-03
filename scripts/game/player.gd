@@ -2,8 +2,8 @@ extends CharacterBody3D
 
 
 const ROTATE_SPEED:float = 0.0025
-const ACCEL:float = 0.2
-const MAX_ACCEL:float = 27.0
+const ACCEL:float = 0.5
+const MAX_VEL:float = 27.0
 const FAST_FALL:float = -20.0
 var JUMP_VELOCITY:float = 10.0
 var speed = 15.0 # probably cap at 25-30

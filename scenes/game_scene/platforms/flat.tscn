@@ -11,7 +11,7 @@ material = ExtResource("1_x4e58")
 size = Vector3(4, 1, 12)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mh7ns"]
-size = Vector3(4, 12, 11.99)
+size = Vector3(4, 8, 11.99)
 
 [node name="Flat" type="StaticBody3D"]
 collision_layer = 4
@@ -71,7 +71,7 @@ mesh = SubResource("BoxMesh_n6vb4")
 skeleton = NodePath("../..")
 
 [node name="spacing" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.01)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 6.01)
 collision_layer = 16
 collision_mask = 32
 

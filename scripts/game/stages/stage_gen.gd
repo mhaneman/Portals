@@ -21,7 +21,7 @@ var up_scenes = [
 ]
 
 const INIT_PLAT_SIZE:float = 2.0
-const MIN_PLAT_SIZE:float = 0.6
+const MIN_PLAT_SIZE:float = 0.4
 const OOB_DISPL:float = -50.0
 
 @onready var gamebus = get_node("/root/gamebus")
@@ -32,12 +32,13 @@ func _ready():
 	
 func generate():
 	# initalize path
+	print(gamebus.base_scale)
 	for __ in range(3):
-		await add_platform_to_path(flat_scene, Directions.straight, base_scale)
+		await add_platform_to_path(flat_scene, Directions.straight, gamebus.base_scale)
 	
 	await generate_with_direction()
 	await finalize_path()
-	# generate_items()
+	generate_items()
 	
 func generate_with_direction():
 	var chosen
@@ -62,13 +63,7 @@ func generate_items():
 
 func finalize_path():
 	await add_platform_to_path(portal_scene, Directions.straight, 1.0, false)
-	
-	#need to fix this since we now go up and down ...
-	
-	# if final.global_position.y < 0:
-	#	gamebus.out_of_bounds_y_pos = final.global_position.y + OOB_DISPL
-	# else:
-	#	gamebus.out_of_bounds_y_pos = OOB_DISPL
+	# need to set fall boundary
 	
 func generate_path(scenes):
 	var rand = rng.randi_range(0, 1000)
@@ -81,7 +76,7 @@ func generate_path(scenes):
 		
 func add_random_straight(scenes):
 	var type:int = rng.randi_range(0, scenes.size() - 1)
-	await add_platform_to_path(scenes[type], Directions.straight, base_scale)
+	await add_platform_to_path(scenes[type], Directions.straight, gamebus.base_scale)
 	
 		
 func add_random_spiral(scenes):
@@ -91,13 +86,19 @@ func add_random_spiral(scenes):
 	
 	for __ in pieces:
 		if rng.randi_range(0, 1):
-			await add_platform_to_path(scenes[type], direction, base_scale)
+			await add_platform_to_path(scenes[type], direction, gamebus.base_scale)
 		else:
-			await add_platform_to_path(scenes[type], Directions.straight, base_scale)
+			await add_platform_to_path(scenes[type], Directions.straight, gamebus.base_scale)
+
+
+func add_random_platform(scenes):
+	var direction:int = rng.randi_range(0, Directions.size() - 1)
+	var type:int = rng.randi_range(0, scenes.size() - 1)
+	await add_platform_to_path(scenes[type], direction, gamebus.base_scale)
 	
 # signals 
 func _on_portal_entered():
 	gamebus.stage_number += 1
-	gamebus.base_scale = clampf( \
+	gamebus.base_scale = clampf(
 		INIT_PLAT_SIZE - gamebus.stage_number * 0.05, \
 		MIN_PLAT_SIZE, INIT_PLAT_SIZE)

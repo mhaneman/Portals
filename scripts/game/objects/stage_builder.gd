@@ -12,15 +12,9 @@ var instanced_items = []
 
 @onready var current_end_point = self.global_position
 var current_rotation:float = 0
-var base_scale = 1
 
 var connector_scene = preload("res://scenes/game_scene/platforms/connector.tscn")
 var portal_scene = preload("res://scenes/game_scene/platforms/portal.tscn")
-
-func add_random_platform(scenes):
-	var direction:int = rng.randi_range(0, Directions.size() - 1)
-	var type:int = rng.randi_range(0, scenes.size() - 1)
-	await add_platform_to_path(scenes[type], direction, base_scale)
 	
 func add_platform_to_path(scene, direction:Directions, applied_scale:float, check_overlap=true):
 	var instance = scene.instantiate()
@@ -59,7 +53,8 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float, chec
 		current_rotation += -PI / 2
 		
 	instanced_platforms.push_back(instance)
-	instanced_connectors.push_back(connector)
+	if direction != Directions.straight:
+		instanced_connectors.push_back(connector)
 	
 	return instance
 	
