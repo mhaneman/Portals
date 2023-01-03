@@ -36,8 +36,8 @@ func generate():
 		await add_platform_to_path(flat_scene, Directions.straight, base_scale)
 	
 	await generate_with_direction()
-	finalize_path()
-	generate_items()
+	await finalize_path()
+	# generate_items()
 	
 func generate_with_direction():
 	var chosen
@@ -61,17 +61,18 @@ func generate_items():
 	
 
 func finalize_path():
-	var final = await add_platform_to_path(portal_scene, Directions.straight, 1.0)
+	await add_platform_to_path(portal_scene, Directions.straight, 1.0, false)
 	
 	#need to fix this since we now go up and down ...
-	if final.global_position.y < 0:
-		gamebus.out_of_bounds_y_pos = final.global_position.y + OOB_DISPL
-	else:
-		gamebus.out_of_bounds_y_pos = OOB_DISPL
+	
+	# if final.global_position.y < 0:
+	#	gamebus.out_of_bounds_y_pos = final.global_position.y + OOB_DISPL
+	# else:
+	#	gamebus.out_of_bounds_y_pos = OOB_DISPL
 	
 func generate_path(scenes):
 	var rand = rng.randi_range(0, 1000)
-	if rand < 300:
+	if rand < 500:
 		await add_random_spiral(scenes)
 	elif rand < 700:
 		await add_random_straight(scenes)
