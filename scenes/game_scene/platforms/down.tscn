@@ -56,8 +56,8 @@ mesh = ExtResource("2_11i4w")
 
 [node name="spacing" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 4.01)
-collision_layer = 16
-collision_mask = 16
+collision_layer = 32
+collision_mask = 48
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="spacing"]
 shape = SubResource("BoxShape3D_bw8j5")
