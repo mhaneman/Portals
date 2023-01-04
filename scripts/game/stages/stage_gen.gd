@@ -20,19 +20,13 @@ var up_scenes = [
 	stair_scene,
 ]
 
-const INIT_PLAT_SIZE:float = 2.0
-const MIN_PLAT_SIZE:float = 0.4
-const OOB_DISPL:float = -50.0
-
 @onready var gamebus = get_node("/root/gamebus")
 
 func _ready():
-	gamebus.portal_entered.connect(_on_portal_entered)
 	generate()
 	
 func generate():
 	# initalize path
-	print(gamebus.base_scale)
 	for __ in range(3):
 		await add_platform_to_path(flat_scene, Directions.straight, gamebus.base_scale)
 	
@@ -96,9 +90,3 @@ func add_random_platform(scenes):
 	var type:int = rng.randi_range(0, scenes.size() - 1)
 	await add_platform_to_path(scenes[type], direction, gamebus.base_scale)
 	
-# signals 
-func _on_portal_entered():
-	gamebus.stage_number += 1
-	gamebus.base_scale = clampf(
-		INIT_PLAT_SIZE - gamebus.stage_number * 0.05, \
-		MIN_PLAT_SIZE, INIT_PLAT_SIZE)

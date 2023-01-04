@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://bvedmtxc2vo6"]
 
-[ext_resource type="PackedScene" uid="uid://cg65ivaxmfgo4" path="res://scenes/entites/portal_area.tscn" id="1_0goj8"]
 [ext_resource type="Script" path="res://scripts/menu/menu.gd" id="1_wwbac"]
 [ext_resource type="PackedScene" uid="uid://k7qbup211sue" path="res://scenes/menu_scene/ui/menu_overlay.tscn" id="2_mko0d"]
 [ext_resource type="PackedScene" uid="uid://c73ucoibs10a8" path="res://scenes/menu_scene/player.tscn" id="3_rfky1"]
+[ext_resource type="PackedScene" uid="uid://cwolxqhfkkav4" path="res://scenes/menu_scene/stage_selection/stage_selection_circle.tscn" id="4_1btey"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fwqn5"]
 size = Vector3(100, 1, 100)
@@ -32,22 +32,22 @@ tonemap_white = 0.9
 [node name="menu" type="Node3D"]
 script = ExtResource("1_wwbac")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="camera_arm" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.76837e-07)
+
+[node name="Camera3D" type="Camera3D" parent="camera_arm"]
+transform = Transform3D(0.707107, 0.183013, 0.683013, 0, 0.965926, -0.258819, -0.707107, 0.183013, 0.683013, 12, 2, 12)
+
+[node name="ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
 shape = SubResource("BoxShape3D_fwqn5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground/CollisionShape3D"]
 mesh = SubResource("BoxMesh_fpnjo")
-
-[node name="portal_area" parent="." instance=ExtResource("1_0goj8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.823136, 0, 0.567844, 0, 1, 0, -0.567844, 0, 0.823136, 6, 2, 8)
 
 [node name="player" parent="." instance=ExtResource("3_rfky1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -59,3 +59,6 @@ environment = SubResource("Environment_4wobw")
 transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
 
 [node name="menu_overlay" parent="." instance=ExtResource("2_mko0d")]
+
+[node name="stage_selection_circle" parent="." instance=ExtResource("4_1btey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 24)

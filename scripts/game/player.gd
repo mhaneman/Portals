@@ -1,15 +1,20 @@
 extends CharacterBody3D
 
+@onready var INIT_POS = self.global_position
 
 const ROTATE_SPEED:float = 0.0025
+const JUMP_VELOCITY:float = 10.0
+const FAST_FALL:float = -20.0
+
+var speed = 15.0 # probably cap at 25-30
 const ACCEL:float = 0.5
 const MAX_VEL:float = 27.0
-const FAST_FALL:float = -20.0
-var JUMP_VELOCITY:float = 10.0
-var speed = 15.0 # probably cap at 25-30
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var theta:float = 0
-var direction = Vector2(0, 1)
+const INIT_DIR = Vector2(0, 1)
+var direction = INIT_DIR
+
 
 @onready var gamebus = get_node("/root/gamebus") 
 
@@ -19,18 +24,30 @@ func _ready():
 	
 func _on_portal_entered():
 	self.global_position = Vector3(0, 3, 3)
-	direction = Vector2(0, 1)
+	direction = INIT_DIR
 	theta = 0
 	speed += ACCEL
 	
+	print("portal entered -> player")
+	
+	gamebus.stage_number += 1
+	gamebus.base_scale = clampf(
+		gamebus.INIT_PLAT_SIZE - gamebus.stage_number * 0.1, \
+		gamebus.MIN_PLAT_SIZE, gamebus.INIT_PLAT_SIZE)
+	
 func spawn_player():
-	self.global_position = Vector3(0, 3, 3)
+	self.global_position = INIT_POS
 	direction = Vector2(0, 1)
 	theta = 0
 
 func _process(_delta):
 	if self.global_position.y < gamebus.out_of_bounds_y_pos:
-		spawn_player()
+		if gamebus.INFINITE_LIVES:
+			spawn_player()
+		else:
+			gamebus.stage_number = 1
+			gamebus.base_scale = 1.5
+			get_tree().change_scene_to_file("res://scenes/menu_scene/menu.tscn")
 	
 	if Input.is_action_just_pressed("left"):
 		theta += PI / 2
