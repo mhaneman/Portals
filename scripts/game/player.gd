@@ -42,7 +42,7 @@ func _process(_delta):
 		theta += -PI / 2
 		
 	camera.rotation.y = lerp_angle(camera.rotation.y, theta, ROTATE_SPEED * speed)
-	body.rotation.y = lerp_angle(body.rotation.y, theta, 1.0)
+	body.rotation.y = lerp_angle(body.rotation.y, theta, 0.5)
 
 func _physics_process(delta):
 	if not is_on_floor():

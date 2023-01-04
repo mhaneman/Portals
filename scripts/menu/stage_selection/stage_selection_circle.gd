@@ -4,7 +4,7 @@ var stage_selection_item = preload("res://scenes/menu_scene/stage_selection/stag
 
 var stage_types = [
 	{"name": "normal", "albedo": Color(1, 0, 0) },
-	{"name": "challenge", "albedo": Color(0, 1, 0) },
+	{"name": "customize", "albedo": Color(0, 1, 0) },
 	{"name": "advanced", "albedo": Color(0, 0, 1) },
 	{"name": "disco", "albedo": Color(0, 0, 0) }
 ]
