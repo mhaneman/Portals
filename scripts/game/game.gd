@@ -3,6 +3,7 @@ extends Node3D
 @onready var gamebus = get_node("/root/gamebus")
 
 var gen_scene = preload("res://scenes/game_scene/stages/stage_gen.tscn")
+var test_scene = preload("res://scenes/game_scene/stages/stage_test.tscn")
 
 var stage_A
 var stage_B
@@ -10,7 +11,7 @@ var stage_B
 func _ready():
 	gamebus.portal_entered.connect(_on_portal_entered)
 	
-	stage_A = gen_scene.instantiate()
+	stage_A = gen_scene.instantiate() if !gamebus.play_tutorial else test_scene.instantiate()
 	self.add_child(stage_A)
 	
 	stage_B = gen_scene.instantiate()

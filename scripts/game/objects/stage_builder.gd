@@ -19,7 +19,7 @@ var portal_scene = preload("res://scenes/game_scene/platforms/portal.tscn")
 func add_platform_to_path(scene, direction:Directions, applied_scale:float, check_overlap=true):
 	var instance = scene.instantiate()
 	self.add_child(instance)
-	instance.scale = Vector3(applied_scale, 1, 1)
+	instance.scale = Vector3(applied_scale, instance.scale.y, instance.scale.z)
 	
 	var connector
 	
@@ -29,7 +29,7 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float, chec
 	else:
 		connector = connector_scene.instantiate()
 		self.add_child(connector) 
-		connector.scale = Vector3(applied_scale, 1, applied_scale)
+		connector.scale = Vector3(applied_scale, connector.scale.y, applied_scale)
 		connector.global_position = current_end_point
 		connector.rotate_y(current_rotation) 
 		

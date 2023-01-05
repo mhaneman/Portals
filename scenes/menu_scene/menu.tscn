@@ -36,8 +36,8 @@ script = ExtResource("1_wwbac")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.76837e-07)
 
 [node name="Camera" type="Camera3D" parent="camera_arm"]
-transform = Transform3D(0.707107, 0.241845, 0.664463, 0, 0.939693, -0.34202, -0.707107, 0.241845, 0.664463, 14, 2, 14)
-fov = 55.0
+transform = Transform3D(0.707107, 0.183013, 0.683013, 0, 0.965926, -0.258819, -0.707107, 0.183013, 0.683013, 15, 1, 15)
+fov = 40.0
 
 [node name="ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -62,4 +62,4 @@ transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 
 [node name="menu_overlay" parent="." instance=ExtResource("2_mko0d")]
 
 [node name="stage_selection_circle" parent="." instance=ExtResource("4_1btey")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 24)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)

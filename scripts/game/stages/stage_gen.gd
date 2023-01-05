@@ -10,17 +10,23 @@ var coin_scene = preload("res://scenes/game_scene/items/coin.tscn")
 var firework_scene = preload("res://scenes/game_scene/items/firework.tscn")
 var totem_scene = preload("res://scenes/game_scene/items/totem.tscn")
 
+# maybe rewrite this to have catagories of platforms instead of just general
+# types
+
+
 var down_scenes = [
 	flat_scene,
 	down_scene,
 ]
-
 var up_scenes = [
 	flat_scene,
 	stair_scene,
 ]
 
 @onready var gamebus = get_node("/root/gamebus")
+
+func _init():
+	pass
 
 func _ready():
 	generate()

@@ -25,10 +25,10 @@ func add_stage(label, albedo, theta_offset):
 	self.add_child(stage)
 	stage.mode_name.text = label
 	stage.portal_area.set_portal_color(albedo)
-	stage.content.position = Vector3(0, 10, -24)
+	stage.content.position = Vector3(0, 8, -24)
 	stage.rotate_y(theta_offset)
 	
-var theta = PI/8
+var theta = 0
 var theta_quant = PI / 2
 const ROTATE_SPEED = 0.02
 

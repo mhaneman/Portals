@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/game/portal_area.gd" id="1_mu1e7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fr8q4"]
-radius = 6.0
+radius = 2.0
 
 [sub_resource type="Shader" id="Shader_t43f5"]
 resource_local_to_scene = true
@@ -28,8 +28,8 @@ shader_parameter/color = Vector3(0, 0, 0)
 [sub_resource type="SphereMesh" id="SphereMesh_qdjam"]
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_hsr3f")
-radius = 6.0
-height = 12.0
+radius = 2.0
+height = 4.0
 
 [node name="portal_area" type="Area3D"]
 collision_layer = 8

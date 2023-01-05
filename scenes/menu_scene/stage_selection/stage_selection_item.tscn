@@ -11,12 +11,7 @@ script = ExtResource("1_3ycmj")
 [node name="portal_area" parent="content" instance=ExtResource("1_dx63r")]
 
 [node name="modes" type="Node3D" parent="content"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 6)
-
-[node name="mode_label" type="Label3D" parent="content/modes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02443, 0)
-pixel_size = 0.05
-text = "Mode"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 2)
 
 [node name="mode_name" type="Label3D" parent="content/modes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.24618, 0)

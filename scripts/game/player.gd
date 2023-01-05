@@ -5,16 +5,20 @@ extends CharacterBody3D
 @onready var body = $CollisionShape3D
 @onready var gamebus = get_node("/root/gamebus") 
 
-const ROTATE_SPEED:float = 0.0025
+# maybe have the player accelerate when in freefall
+
+const ROTATE_SPEED:float = 0.0023
 const JUMP_VELOCITY:float = 12.0
 const FAST_FALL:float = -20.0
 
-var speed = 15.0 # probably cap at 25-30
-const ACCEL:float = 0.5
-const MAX_VEL:float = 27.0
+const INIT_SPEED:float = 14.0
+const ACCEL:float = 0.3
+const MAX_SPEED:float = 24.0
+var speed:float = INIT_SPEED
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var theta:float = 0
+
 const INIT_DIR = Vector2(0, 1)
 var direction = INIT_DIR
 
@@ -73,11 +77,12 @@ func _on_portal_entered():
 	self.global_position = Vector3(0, 3, 3)
 	direction = INIT_DIR
 	theta = 0
-	speed += ACCEL
+	speed = clampf(speed + ACCEL, 0, MAX_SPEED)
+	print(speed)
 	
 	print("portal entered -> player")
 	
 	gamebus.stage_number += 1
 	gamebus.base_scale = clampf(
-		gamebus.INIT_PLAT_SIZE - gamebus.stage_number * 0.1, \
+		gamebus.INIT_PLAT_SIZE - gamebus.stage_number * 0.03, \
 		gamebus.MIN_PLAT_SIZE, gamebus.INIT_PLAT_SIZE)

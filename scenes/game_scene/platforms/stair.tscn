@@ -1,15 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://ckrl0jbd4is0u"]
 
 [ext_resource type="Script" path="res://scripts/game/objects/platform.gd" id="1_k7pl3"]
-[ext_resource type="ArrayMesh" uid="uid://bgsr2s53ql4me" path="res://assets/platforms/stair.obj" id="2_jk1gc"]
+[ext_resource type="ArrayMesh" uid="uid://y057y6m2y8ug" path="res://assets/platforms/stair_long.obj" id="2_v12xc"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2cy1b"]
-points = PackedVector3Array(-2, 0, 0, 2, 0, 0, -2, 4, 8, 2, 4, 8, -2, -1, 0, 2, -1, 0, -2, 3, 8, 2, 3, 8)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yy5fq"]
+points = PackedVector3Array(-2, 0, 0, 2, 0, 0, -2, 6, 12, 2, 6, 12, -2, -1, 0, 2, -1, 0, -2, 5, 12, 2, 5, 12)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8waqp"]
-size = Vector3(4, 12, 7.99)
+[sub_resource type="BoxShape3D" id="BoxShape3D_e8js1"]
+size = Vector3(4, 7.5, 11.99)
 
 [node name="stair" type="StaticBody3D"]
+transform = Transform3D(0.833, 0, 0, 0, 1, 0, 0, 0, 0.833, 0, 0, 0)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_k7pl3")
@@ -19,10 +20,10 @@ script = ExtResource("1_k7pl3")
 [node name="start" type="Node3D" parent="points"]
 
 [node name="end" type="Node3D" parent="points"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 12)
 
 [node name="spawns" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 4, 8)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 6, 12)
 
 [node name="Node3D" type="Node3D" parent="spawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
@@ -49,16 +50,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 6.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 7.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("ConvexPolygonShape3D_2cy1b")
+shape = SubResource("ConvexPolygonShape3D_yy5fq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-mesh = ExtResource("2_jk1gc")
+mesh = ExtResource("2_v12xc")
 
 [node name="spacing" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4.01)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 6.01)
 collision_layer = 32
 collision_mask = 48
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="spacing"]
-shape = SubResource("BoxShape3D_8waqp")
+shape = SubResource("BoxShape3D_e8js1")

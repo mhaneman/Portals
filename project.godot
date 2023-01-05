@@ -39,7 +39,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-gamebus="*res://scripts/gamebus.gd"
+gamebus="*res://scripts/autoloads/gamebus.gd"
 
 [display]
 
