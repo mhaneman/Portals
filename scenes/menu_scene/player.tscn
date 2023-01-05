@@ -1,17 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://c73ucoibs10a8"]
 
 [ext_resource type="Script" path="res://scripts/menu/player.gd" id="1_mcypn"]
+[ext_resource type="PackedScene" uid="uid://c8jbeods2w1bf" path="res://assets/characters/unicycle.glb" id="2_4h8gs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1k6fe"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_to742"]
+height = 3.0
 
 [node name="player" type="CharacterBody3D"]
 collision_mask = 12
 script = ExtResource("1_mcypn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39883, 0)
 shape = SubResource("CapsuleShape3D_1k6fe")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("CapsuleMesh_to742")
+[node name="unicycle" parent="CollisionShape3D" instance=ExtResource("2_4h8gs")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.8, 0)
