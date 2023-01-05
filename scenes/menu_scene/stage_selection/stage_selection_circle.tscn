@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwolxqhfkkav4"]
+
+[ext_resource type="Script" path="res://scripts/menu/stage_selection/stage_selection_circle.gd" id="1_wqql7"]
+
+[node name="stage_selection_circle" type="Node3D"]
+script = ExtResource("1_wqql7")

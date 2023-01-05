@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var gamebus = get_node("/root/gamebus")
+
 func _ready():
 	gamebus.portal_entered.connect(_on_portal_entered)
 	

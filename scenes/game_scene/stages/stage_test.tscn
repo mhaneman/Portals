@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmqfgoknsxmuh"]
+
+[ext_resource type="Script" path="res://scripts/game/stages/stage_test.gd" id="1_qsmx8"]
+
+[node name="stage_test" type="Node3D"]
+script = ExtResource("1_qsmx8")

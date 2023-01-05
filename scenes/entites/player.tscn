@@ -1,26 +1,29 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://bvcdmaybwltn4"]
 
 [ext_resource type="Script" path="res://scripts/game/player.gd" id="1_u01ix"]
 [ext_resource type="PackedScene" uid="uid://f0q78gql5t3k" path="res://scenes/game_scene/ui/swipe_controls.tscn" id="2_agvtw"]
+[ext_resource type="PackedScene" uid="uid://bp70pbanogbi2" path="res://assets/characters/unicycle_w__animation.glb" id="4_q43w6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0f7li"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_h6n81"]
+height = 3.0
 
 [node name="Player" type="CharacterBody3D"]
-collision_layer = 2
+collision_mask = 12
 script = ExtResource("1_u01ix")
 
 [node name="swipe_controls" parent="." instance=ExtResource("2_agvtw")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37063, 0)
 shape = SubResource("CapsuleShape3D_0f7li")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("CapsuleMesh_h6n81")
+[node name="unicycle_w__animation" parent="CollisionShape3D" instance=ExtResource("4_q43w6")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.9, 0)
 
-[node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(-1, -5.01437e-08, 7.16126e-08, 0, 0.819152, 0.573577, -8.74228e-08, 0.573577, -0.819152, 0, 5, -5)
+[node name="camera_arm" type="Node3D" parent="."]
+
+[node name="Camera" type="Camera3D" parent="camera_arm"]
+transform = Transform3D(-1, -5.01437e-08, 7.16125e-08, 0, 0.819152, 0.573577, -8.74228e-08, 0.573577, -0.819152, 0, 5, -5)
 near = 2.0
 
 [connection signal="swiped" from="swipe_controls" to="." method="_on_swipe_controls_swiped"]

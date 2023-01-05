@@ -2,27 +2,26 @@ extends Node3D
 
 @onready var gamebus = get_node("/root/gamebus")
 
-var tutorial_gen = preload("res://scenes/game_scene/stages/stage_tutorial.tscn")
-var stage_gen = preload("res://scenes/game_scene/stages/stage_gen.tscn")
+var gen_scene = preload("res://scenes/game_scene/stages/stage_gen.tscn")
 
-var tutorial
-var stage
-var i = 0
+var stage_A
+var stage_B
 
 func _ready():
 	gamebus.portal_entered.connect(_on_portal_entered)
 	
-	if gamebus.play_tutorial:
-		tutorial = tutorial_gen.instantiate()
-		self.add_child(tutorial)
-	else:
-		stage = stage_gen.instantiate()
-		self.add_child(stage)
+	stage_A = gen_scene.instantiate()
+	self.add_child(stage_A)
 	
-# what an awful way to program this... NEED TO REFACTOR!!!
+	stage_B = gen_scene.instantiate()
+	stage_B.position = Vector3(10000, 10000, 10000)
+	self.add_child(stage_B)
+
 func _on_portal_entered():
-	if i == 0 and gamebus.play_tutorial:
-		tutorial.queue_free()
-		stage = stage_gen.instantiate()
-		self.add_child(stage)
-	i += 1
+	stage_A.queue_free()
+	stage_A = stage_B
+	stage_A.position = Vector3.ZERO
+	
+	stage_B = gen_scene.instantiate()
+	stage_B.position = Vector3(10000, 10000, 10000)
+	self.add_child(stage_B)

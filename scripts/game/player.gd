@@ -1,43 +1,48 @@
 extends CharacterBody3D
 
+@onready var INIT_POS = self.global_position
+@onready var camera = $camera_arm
+@onready var body = $CollisionShape3D
+@onready var gamebus = get_node("/root/gamebus") 
 
 const ROTATE_SPEED:float = 0.0025
-const ACCEL:float = 0.2
-const MAX_ACCEL:float = 27.0
+const JUMP_VELOCITY:float = 12.0
 const FAST_FALL:float = -20.0
-var JUMP_VELOCITY:float = 10.0
+
 var speed = 15.0 # probably cap at 25-30
+const ACCEL:float = 0.5
+const MAX_VEL:float = 27.0
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var theta:float = 0
-var direction = Vector2(0, 1)
-
-@onready var gamebus = get_node("/root/gamebus") 
+const INIT_DIR = Vector2(0, 1)
+var direction = INIT_DIR
 
 func _ready():
 	gamebus.portal_entered.connect(_on_portal_entered)
 	
-	
-func _on_portal_entered():
-	self.global_position = Vector3(0, 3, 3)
-	direction = Vector2(0, 1)
-	theta = 0
-	speed += ACCEL
-	
 func spawn_player():
-	self.global_position = Vector3(0, 3, 3)
+	self.global_position = INIT_POS
 	direction = Vector2(0, 1)
 	theta = 0
 
 func _process(_delta):
 	if self.global_position.y < gamebus.out_of_bounds_y_pos:
-		spawn_player()
+		if gamebus.INFINITE_LIVES:
+			spawn_player()
+		else:
+			gamebus.stage_number = 1
+			gamebus.base_scale = 1.5
+			get_tree().change_scene_to_file("res://scenes/menu_scene/menu.tscn")
+	
 	
 	if Input.is_action_just_pressed("left"):
 		theta += PI / 2
 	if Input.is_action_just_pressed("right"):
 		theta += -PI / 2
 		
-	self.rotation.y = lerp_angle(self.rotation.y, theta, ROTATE_SPEED * speed)
+	camera.rotation.y = lerp_angle(camera.rotation.y, theta, ROTATE_SPEED * speed)
+	body.rotation.y = lerp_angle(body.rotation.y, theta, 0.5)
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -61,3 +66,18 @@ func _physics_process(delta):
 	velocity.z = direction.y * speed
 	
 	move_and_slide()
+	
+	
+# signals
+func _on_portal_entered():
+	self.global_position = Vector3(0, 3, 3)
+	direction = INIT_DIR
+	theta = 0
+	speed += ACCEL
+	
+	print("portal entered -> player")
+	
+	gamebus.stage_number += 1
+	gamebus.base_scale = clampf(
+		gamebus.INIT_PLAT_SIZE - gamebus.stage_number * 0.1, \
+		gamebus.MIN_PLAT_SIZE, gamebus.INIT_PLAT_SIZE)

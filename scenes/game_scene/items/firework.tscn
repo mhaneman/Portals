@@ -1,24 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0acivu131oue"]
+[gd_scene load_steps=4 format=3 uid="uid://c0acivu131oue"]
 
 [ext_resource type="Script" path="res://scripts/game/firework.gd" id="1_sn33q"]
+[ext_resource type="PackedScene" uid="uid://cb2q15wf754s4" path="res://assets/items/firework.glb" id="2_ivd7l"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kyoql"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xtqr"]
-albedo_color = Color(0.623529, 0.313726, 0.768627, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_houfv"]
-material = SubResource("StandardMaterial3D_3xtqr")
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t5qds"]
+height = 4.38236
 
 [node name="firework" type="Area3D"]
-collision_layer = 8
-collision_mask = 2
+collision_layer = 2
 script = ExtResource("1_sn33q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_kyoql")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_t5qds")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("CapsuleMesh_houfv")
+[node name="firework" parent="CollisionShape3D" instance=ExtResource("2_ivd7l")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, -1.01186, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
