@@ -3,14 +3,14 @@
 [ext_resource type="Script" path="res://scripts/game/objects/connector.gd" id="1_yba75"]
 [ext_resource type="Material" uid="uid://cu1lesfx7w4hc" path="res://assets/platforms/platform_material.tres" id="1_yjjum"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cgtpe"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_we3e4"]
 size = Vector3(4, 1, 4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_hutyp"]
+[sub_resource type="BoxMesh" id="BoxMesh_isl04"]
 material = ExtResource("1_yjjum")
 size = Vector3(4, 1, 4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2p0v3"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_s5evw"]
 size = Vector3(3.99, 8, 3.99)
 
 [node name="connector" type="StaticBody3D"]
@@ -36,10 +36,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2)
-shape = SubResource("BoxShape3D_cgtpe")
+shape = SubResource("BoxShape3D_we3e4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("BoxMesh_hutyp")
+mesh = SubResource("BoxMesh_isl04")
 
 [node name="spacing" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2)
@@ -47,4 +47,4 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="spacing"]
-shape = SubResource("BoxShape3D_2p0v3")
+shape = SubResource("BoxShape3D_s5evw")

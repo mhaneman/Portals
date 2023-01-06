@@ -62,6 +62,7 @@ func generate_items():
 	
 
 func finalize_path():
+	await add_platform_to_path(flat_scene, Directions.straight, gamebus.base_scale)
 	await add_platform_to_path(portal_scene, Directions.straight, 1.0, false)
 	# need to set fall boundary
 	
