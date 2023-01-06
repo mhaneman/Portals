@@ -17,10 +17,10 @@ const INFINITE_LIVES:bool = false
 var play_tutorial:bool = true
 var stage_number:int = 1
 var out_of_bounds_y_pos:float = -200
-var base_scale:float = 1.2
 
-const INIT_PLAT_SIZE:float = 1.5
+const INIT_PLAT_SIZE:float = 1.2
 const MIN_PLAT_SIZE:float = 0.3
+var base_scale:float = INIT_PLAT_SIZE
 const OOB_DISPL:float = -50.0
 
 # refactor into player

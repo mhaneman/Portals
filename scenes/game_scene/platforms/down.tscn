@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scripts/game/objects/platform.gd" id="1_scdpp"]
 [ext_resource type="ArrayMesh" uid="uid://y057y6m2y8ug" path="res://assets/platforms/stair_long.obj" id="2_4348r"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u0qbw"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hhvt2"]
 points = PackedVector3Array(-2, 0, 0, 2, 0, 0, -2, 6, 12, 2, 6, 12, -2, -1, 0, 2, -1, 0, -2, 5, 12, 2, 5, 12)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4e070"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_lxms3"]
 size = Vector3(4, 7.5, 11.99)
 
 [node name="down" type="StaticBody3D"]
@@ -50,7 +50,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 7.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, -6, 12)
-shape = SubResource("ConvexPolygonShape3D_u0qbw")
+shape = SubResource("ConvexPolygonShape3D_hhvt2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -62,4 +62,4 @@ collision_layer = 32
 collision_mask = 48
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="spacing"]
-shape = SubResource("BoxShape3D_4e070")
+shape = SubResource("BoxShape3D_lxms3")
