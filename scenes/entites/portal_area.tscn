@@ -1,33 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cg65ivaxmfgo4"]
+[gd_scene load_steps=5 format=3 uid="uid://cg65ivaxmfgo4"]
 
 [ext_resource type="Script" path="res://scripts/game/portal_area.gd" id="1_mu1e7"]
+[ext_resource type="Material" uid="uid://ye57hwfw5mud" path="res://assets/portals/portal_area.tres" id="2_1dfds"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fr8q4"]
 radius = 2.0
 
-[sub_resource type="Shader" id="Shader_t43f5"]
-resource_local_to_scene = true
-code = "shader_type spatial;
-
-uniform vec3 color;
-
-void vertex() {
-	VERTEX.y += sin((TIME * 2.0 + VERTEX.x) + (TIME * 1.0 + VERTEX.z)) * 0.1;
-}
-
-void fragment() {
-	ALBEDO = color;
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hsr3f"]
-resource_local_to_scene = true
-render_priority = 0
-shader = SubResource("Shader_t43f5")
-shader_parameter/color = Vector3(0, 0, 0)
-
 [sub_resource type="SphereMesh" id="SphereMesh_qdjam"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_hsr3f")
+material = ExtResource("2_1dfds")
 radius = 2.0
 height = 4.0
 

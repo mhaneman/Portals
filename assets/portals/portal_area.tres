@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ye57hwfw5mud"]
+
+[sub_resource type="Shader" id="Shader_t43f5"]
+resource_local_to_scene = true
+code = "shader_type spatial;
+
+uniform vec3 color;
+uniform float size = 1.0;
+
+void vertex() {
+	VERTEX.y += sin((TIME * 2.0 + VERTEX.x) + (TIME * 1.0 + VERTEX.z)) * 0.1;
+	VERTEX *= size;
+}
+
+void fragment() {
+	ALBEDO = color;
+}"
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_t43f5")
+shader_parameter/color = Vector3(0, 0, 0)
+shader_parameter/size = 1.0

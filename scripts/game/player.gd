@@ -8,7 +8,7 @@ extends CharacterBody3D
 # maybe have the player accelerate when in freefall
 
 const ROTATE_SPEED:float = 0.0023
-const JUMP_VELOCITY:float = 12.0
+const JUMP_VELOCITY:float = 15.0
 const FAST_FALL:float = -20.0
 
 const INIT_SPEED:float = 14.0

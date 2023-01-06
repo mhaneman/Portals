@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://c85be7yfutqhl"]
 
 [ext_resource type="Script" path="res://scripts/game/game.gd" id="1_dyyby"]
-[ext_resource type="PackedScene" uid="uid://bvcdmaybwltn4" path="res://scenes/game_scene/player.tscn" id="2_gewwx"]
+[ext_resource type="PackedScene" uid="uid://ce4y70uj14qv3" path="res://scenes/entites/player.tscn" id="2_gewwx"]
 [ext_resource type="PackedScene" uid="uid://bxfxfjsxljie7" path="res://scenes/game_scene/ui/game_overlay.tscn" id="3_5c7q4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d3nad"]
@@ -22,7 +22,7 @@ tonemap_white = 0.9
 script = ExtResource("1_dyyby")
 
 [node name="Player" parent="." instance=ExtResource("2_gewwx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true

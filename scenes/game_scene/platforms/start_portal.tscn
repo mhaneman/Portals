@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfodf3bklj65v"]
+
+[ext_resource type="Script" path="res://scripts/game/start_portal.gd" id="1_2g2hc"]
+[ext_resource type="Material" uid="uid://ye57hwfw5mud" path="res://assets/portals/portal_area.tres" id="1_4hmgj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jufgi"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_71oae"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nnfav"]
+size = Vector3(4, 8, 3.99)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_it5db"]
+radius = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ftnp0"]
+resource_local_to_scene = true
+material = ExtResource("1_4hmgj")
+radius = 2.0
+height = 4.0
+
+[node name="start_portal" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_2g2hc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2)
+shape = SubResource("BoxShape3D_jufgi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("BoxMesh_71oae")
+
+[node name="points" type="Node3D" parent="."]
+
+[node name="start" type="Node3D" parent="points"]
+
+[node name="end" type="Node3D" parent="points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="spawns" type="Node3D" parent="."]
+
+[node name="spacing" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2.01)
+collision_layer = 16
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="spacing"]
+shape = SubResource("BoxShape3D_nnfav")
+
+[node name="start_portal_area" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="start_portal_area"]
+shape = SubResource("SphereShape3D_it5db")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="start_portal_area/CollisionShape3D"]
+mesh = SubResource("SphereMesh_ftnp0")
+skeleton = NodePath("../../..")

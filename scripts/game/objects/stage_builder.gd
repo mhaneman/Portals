@@ -14,6 +14,7 @@ var instanced_items = []
 var current_rotation:float = 0
 
 var connector_scene = preload("res://scenes/game_scene/platforms/connector.tscn")
+var start_portal_scene = preload("res://scenes/game_scene/platforms/start_portal.tscn")
 var portal_scene = preload("res://scenes/game_scene/platforms/portal.tscn")
 	
 func add_platform_to_path(scene, direction:Directions, applied_scale:float, check_overlap=true):

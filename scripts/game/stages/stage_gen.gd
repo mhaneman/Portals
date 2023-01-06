@@ -32,13 +32,21 @@ func _ready():
 	generate()
 	
 func generate():
-	# initalize path
-	for __ in range(3):
-		await add_platform_to_path(flat_scene, Directions.straight, gamebus.base_scale)
-	
+	await initalize_path()
 	await generate_with_direction()
 	await finalize_path()
 	generate_items()
+	
+func initalize_path():
+	await add_platform_to_path(start_portal_scene, Directions.straight, gamebus.base_scale, false)
+	for __ in range(3):
+		await add_platform_to_path(flat_scene, Directions.straight, gamebus.base_scale)
+	
+	
+func finalize_path():
+	await add_platform_to_path(flat_scene, Directions.straight, gamebus.base_scale)
+	await add_platform_to_path(portal_scene, Directions.straight, 1.0, false)
+	# need to set fall boundary
 	
 func generate_with_direction():
 	var chosen
@@ -59,12 +67,6 @@ func generate_items():
 	for i in instanced_platforms:
 		if rng.randi_range(0, 3) == 0:
 			add_items_to_platform(coin_scene, i)
-	
-
-func finalize_path():
-	await add_platform_to_path(flat_scene, Directions.straight, gamebus.base_scale)
-	await add_platform_to_path(portal_scene, Directions.straight, 1.0, false)
-	# need to set fall boundary
 	
 func generate_path(scenes):
 	var rand = rng.randi_range(0, 1000)

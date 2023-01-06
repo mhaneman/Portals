@@ -87,7 +87,7 @@ up={
 
 [physics]
 
-3d/default_gravity=25.0
+3d/default_gravity=30.0
 
 [rendering]
 
