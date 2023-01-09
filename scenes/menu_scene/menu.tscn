@@ -18,14 +18,14 @@ size = Vector3(100, 1, 100)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cd76v"]
 
-[sub_resource type="Sky" id="Sky_afo7d"]
+[sub_resource type="Sky" id="Sky_oty4r"]
 sky_material = SubResource("ProceduralSkyMaterial_cd76v")
 
 [sub_resource type="Environment" id="Environment_4wobw"]
 background_mode = 1
 background_color = Color(0.709804, 0.886275, 1, 1)
 background_energy_multiplier = 0.4
-sky = SubResource("Sky_afo7d")
+sky = SubResource("Sky_oty4r")
 tonemap_mode = 3
 tonemap_exposure = 0.9
 tonemap_white = 0.9

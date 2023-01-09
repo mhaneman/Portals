@@ -23,11 +23,17 @@ _global_script_classes=[{
 "class": &"StageBuilder",
 "language": &"GDScript",
 "path": "res://scripts/game/objects/stage_builder.gd"
+}, {
+"base": "Node3D",
+"class": &"Structure",
+"language": &"GDScript",
+"path": "res://scripts/game/objects/structure.gd"
 }]
 _global_script_class_icons={
 "Connector": "",
 "Platform": "",
-"StageBuilder": ""
+"StageBuilder": "",
+"Structure": ""
 }
 
 [application]

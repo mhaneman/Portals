@@ -5,6 +5,9 @@ var flat_scene = preload("res://scenes/game_scene/platforms/flat.tscn")
 var stair_scene = preload("res://scenes/game_scene/platforms/stair.tscn")
 var down_scene = preload("res://scenes/game_scene/platforms/down.tscn")
 
+#structure scenes
+var square_scene = preload("res://scenes/game_scene/structures/square.tscn")
+
 # item scenes
 var coin_scene = preload("res://scenes/game_scene/items/coin.tscn")
 var firework_scene = preload("res://scenes/game_scene/items/firework.tscn")
@@ -71,10 +74,12 @@ func generate_items():
 	
 func generate_path(scenes):
 	var rand = rng.randi_range(0, 1000)
-	if rand < 500:
+	if rand < 300:
 		await add_random_spiral(scenes)
-	elif rand < 700:
+	elif rand < 500:
 		await add_random_straight(scenes)
+	elif rand < 700:
+		await add_structure_to_path(square_scene, rng.randi_range(0, 3))
 	else:
 		await add_random_platform(scenes)
 		

@@ -4,14 +4,14 @@
 [ext_resource type="Material" uid="uid://cu1lesfx7w4hc" path="res://assets/platforms/platform_material.tres" id="1_yjjum"]
 [ext_resource type="PackedScene" uid="uid://tbyltkv4sh7x" path="res://assets/platforms/connector.blend" id="3_qktwe"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_fl1on"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_xvxgu"]
 size = Vector3(4, 1, 4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_6kgpf"]
+[sub_resource type="BoxMesh" id="BoxMesh_8eghc"]
 material = ExtResource("1_yjjum")
 size = Vector3(4, 1, 4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_r1meb"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_bob53"]
 size = Vector3(3.99, 8, 3.99)
 
 [node name="connector" type="StaticBody3D"]
@@ -37,20 +37,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2)
-shape = SubResource("BoxShape3D_fl1on")
+shape = SubResource("BoxShape3D_xvxgu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 visible = false
 sorting_offset = 1.0
-mesh = SubResource("BoxMesh_6kgpf")
+mesh = SubResource("BoxMesh_8eghc")
 
 [node name="connector" parent="CollisionShape3D" instance=ExtResource("3_qktwe")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="spacing" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2)
-collision_layer = 16
+collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="spacing"]
-shape = SubResource("BoxShape3D_r1meb")
+shape = SubResource("BoxShape3D_bob53")

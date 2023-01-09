@@ -63,6 +63,29 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float, chec
 	
 	return instance
 	
+func add_structure_to_path(scene, direction:Directions, check_overlap=true):
+	var instance = scene.instantiate()
+	self.add_child(instance)
+	instance.global_position = current_end_point
+	instance.rotate_y(current_rotation)
+	
+	if await instance.has_overlapping() and check_overlap:
+		instance.queue_free()
+		return
+		
+		
+	if direction == Directions.straight:
+		current_end_point = instance.straights.get_child(0).global_position
+	elif direction == Directions.left:
+		current_rotation += PI / 2
+		current_end_point = instance.lefts.get_child(0).global_position
+	elif direction == Directions.right:
+		current_rotation += -PI / 2
+		current_end_point = instance.rights.get_child(0).global_position
+	else:
+		current_end_point = instance.backs.get_child(0).global_position
+	
+	
 func add_item_to_pos(item_scene, pos:Vector3):
 	var instance = item_scene.instantiate()
 	self.add_child(instance)
