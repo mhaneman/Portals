@@ -1,16 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://do4kvuf42uomu"]
+[gd_scene load_steps=7 format=3 uid="uid://do4kvuf42uomu"]
 
 [ext_resource type="Script" path="res://scripts/game/objects/platform.gd" id="1_7ngeb"]
 [ext_resource type="Material" uid="uid://cu1lesfx7w4hc" path="res://assets/platforms/platform_material.tres" id="1_x4e58"]
+[ext_resource type="PackedScene" uid="uid://ddapc8ivor22k" path="res://assets/platforms/flat.blend" id="3_43r4s"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2mabk"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_cvful"]
 size = Vector3(4, 1, 8)
 
-[sub_resource type="BoxMesh" id="BoxMesh_a5guy"]
+[sub_resource type="BoxMesh" id="BoxMesh_405g6"]
 material = ExtResource("1_x4e58")
 size = Vector3(4, 1, 8)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_idb7j"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_liupi"]
 size = Vector3(4, 8, 7.99)
 
 [node name="Flat" type="StaticBody3D"]
@@ -53,11 +54,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 7.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 4)
-shape = SubResource("BoxShape3D_2mabk")
+shape = SubResource("BoxShape3D_cvful")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("BoxMesh_a5guy")
+visible = false
+mesh = SubResource("BoxMesh_405g6")
 skeleton = NodePath("../..")
+
+[node name="flat" parent="CollisionShape3D" instance=ExtResource("3_43r4s")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="spacing" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 4.01)
@@ -65,4 +70,4 @@ collision_layer = 16
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="spacing"]
-shape = SubResource("BoxShape3D_idb7j")
+shape = SubResource("BoxShape3D_liupi")
