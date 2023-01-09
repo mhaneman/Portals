@@ -32,7 +32,9 @@ func generate():
 	await initalize_path()
 	await generate_with_direction()
 	await finalize_path()
+	
 	generate_items()
+	add_item_to_pos(death_floor, lowest_point)
 	
 func initalize_path():
 	await add_platform_to_path(start_portal_scene, Directions.straight, gamebus.base_scale, false)
@@ -43,7 +45,6 @@ func initalize_path():
 func finalize_path():
 	await add_platform_to_path(flat_scene, Directions.straight, gamebus.base_scale)
 	await add_platform_to_path(portal_scene, Directions.straight, 1.0, false)
-	add_item_to_pos(death_floor, lowest_point)
 	
 func generate_with_direction():
 	var chosen

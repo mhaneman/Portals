@@ -27,5 +27,5 @@ const OOB_DISPL:float = -50.0
 # player gobals
 var current_collected_coins:int = 0
 var total_collected_coins:int = 0
-var collected_fireworks:int = 1000
+var collected_fireworks:int = 10
 	

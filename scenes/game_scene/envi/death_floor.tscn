@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/game/death_floor.gd" id="1_2jlwg"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_5kyjn"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7jsax"]
 height = 10.0
 radius = 250.0
 
-[sub_resource type="Shader" id="Shader_d0vsx"]
+[sub_resource type="Shader" id="Shader_0h53v"]
 code = "shader_type spatial;
 
 uniform vec3 color;
@@ -19,17 +19,19 @@ void fragment() {
 	ALBEDO = color;
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1wxmx"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2xmf"]
 render_priority = 0
-shader = SubResource("Shader_d0vsx")
+shader = SubResource("Shader_0h53v")
 shader_parameter/color = Vector3(0.01, 0.01, 0.01)
 shader_parameter/size = null
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_7d7jh"]
-material = SubResource("ShaderMaterial_1wxmx")
+[sub_resource type="CylinderMesh" id="CylinderMesh_mfijr"]
+material = SubResource("ShaderMaterial_u2xmf")
 top_radius = 250.0
 bottom_radius = 250.0
 height = 10.0
+rings = 1
+cap_bottom = false
 
 [node name="death_floor" type="Area3D"]
 collision_layer = 0
@@ -37,9 +39,9 @@ script = ExtResource("1_2jlwg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
-shape = SubResource("CylinderShape3D_5kyjn")
+shape = SubResource("CylinderShape3D_7jsax")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("CylinderMesh_7d7jh")
+mesh = SubResource("CylinderMesh_mfijr")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

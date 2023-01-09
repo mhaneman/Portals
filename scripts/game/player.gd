@@ -14,7 +14,8 @@ const FAST_FALL:float = -20.0
 const INIT_SPEED:float = 14.0
 const ACCEL:float = 0.1
 const MAX_SPEED:float = 22.0
-var speed:float = INIT_SPEED
+var min_speed:float = INIT_SPEED
+var total_speed:float = min_speed
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var theta:float = 0
@@ -36,7 +37,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("right"):
 		theta += -PI / 2
 		
-	camera.rotation.y = lerp_angle(camera.rotation.y, theta, ROTATE_SPEED * speed)
+	camera.rotation.y = lerp_angle(camera.rotation.y, theta, ROTATE_SPEED * total_speed)
 	body.rotation.y = lerp_angle(body.rotation.y, theta, 0.5)
 	
 
@@ -48,7 +49,7 @@ const TERM_GAIN:float = 10.0 # limit on how much speed we can gain from falling
 const MIN_GAIN:float = 0.2 # implement slowing down a little when going uphill
 func _physics_process(delta):
 	# controls
-	if Input.is_action_pressed("jump") && gamebus.collected_fireworks > 0:
+	if Input.is_action_just_pressed("jump") && gamebus.collected_fireworks > 0:
 		gamebus.collected_fireworks -= 1
 		velocity.y = JUMP_VELOCITY
 		
@@ -69,8 +70,9 @@ func _physics_process(delta):
 		gained_speed = clampf(gained_speed - FRICTION, 0, TERM_GAIN)
 		collision_vel_gain = 0.0
 		
-	velocity.x = direction.x * (speed + gained_speed)
-	velocity.z = direction.y * (speed + gained_speed)
+	total_speed = min_speed + gained_speed	
+	velocity.x = direction.x * total_speed
+	velocity.z = direction.y * total_speed
 	
 	move_and_slide()
 	
@@ -81,7 +83,7 @@ func _on_portal_entered():
 	direction = INIT_DIR
 	theta = 0
 	gained_speed = 0
-	speed = clampf(speed + ACCEL, 0, MAX_SPEED)
+	min_speed = clampf(min_speed + ACCEL, 0, MAX_SPEED)
 	
 	gamebus.stage_number += 1
 	gamebus.base_scale = clampf(
