@@ -10,8 +10,8 @@ var coin_scene = preload("res://scenes/game_scene/items/coin.tscn")
 var firework_scene = preload("res://scenes/game_scene/items/firework.tscn")
 var totem_scene = preload("res://scenes/game_scene/items/totem.tscn")
 
-# maybe rewrite this to have catagories of platforms instead of just general
-# types
+#envi scenes
+var death_floor = preload("res://scenes/game_scene/envi/death_floor.tscn")
 
 
 var down_scenes = [
@@ -24,9 +24,6 @@ var up_scenes = [
 ]
 
 @onready var gamebus = get_node("/root/gamebus")
-
-func _init():
-	pass
 
 func _ready():
 	generate()
@@ -46,7 +43,7 @@ func initalize_path():
 func finalize_path():
 	await add_platform_to_path(flat_scene, Directions.straight, gamebus.base_scale)
 	await add_platform_to_path(portal_scene, Directions.straight, 1.0, false)
-	# need to set fall boundary
+	add_item_to_pos(death_floor, lowest_point)
 	
 func generate_with_direction():
 	var chosen

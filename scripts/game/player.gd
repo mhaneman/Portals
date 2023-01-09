@@ -31,15 +31,6 @@ func spawn_player():
 	theta = 0
 
 func _process(_delta):
-	if self.global_position.y < gamebus.out_of_bounds_y_pos:
-		if gamebus.INFINITE_LIVES:
-			spawn_player()
-		else:
-			gamebus.stage_number = 1
-			gamebus.base_scale = gamebus.INIT_PLAT_SIZE
-			get_tree().change_scene_to_file("res://scenes/menu_scene/menu.tscn")
-	
-	
 	if Input.is_action_just_pressed("left"):
 		theta += PI / 2
 	if Input.is_action_just_pressed("right"):
@@ -49,7 +40,6 @@ func _process(_delta):
 	body.rotation.y = lerp_angle(body.rotation.y, theta, 0.5)
 	
 
-
 var collision_vel_gain:float = 0.0 # how fast were we falling before hitting the ground
 const COLLISION_ENERGY_LOSS = 0.08 # how much velocity is retained from collision w/ ground
 var gained_speed:float = 0.0 # the amount of speed gained from falling -> applied to player
@@ -58,9 +48,10 @@ const TERM_GAIN:float = 10.0 # limit on how much speed we can gain from falling
 const MIN_GAIN:float = 0.2 # implement slowing down a little when going uphill
 func _physics_process(delta):
 	# controls
-	if Input.is_action_just_pressed("jump") && gamebus.collected_fireworks > 0:
+	if Input.is_action_pressed("jump") && gamebus.collected_fireworks > 0:
 		gamebus.collected_fireworks -= 1
 		velocity.y = JUMP_VELOCITY
+		
 	if Input.is_action_just_pressed("down") and !is_on_floor():
 		velocity.y = FAST_FALL
 	if Input.is_action_just_pressed("left"):

@@ -8,8 +8,8 @@ const MIN_DIST:float = 10
 
 var instanced_platforms = []
 var instanced_connectors = []
-var instanced_items = []
 
+@onready var lowest_point:Vector3 = self.global_position
 @onready var current_end_point = self.global_position
 var current_rotation:float = 0
 
@@ -52,6 +52,10 @@ func add_platform_to_path(scene, direction:Directions, applied_scale:float, chec
 		current_rotation += PI / 2
 	elif direction == Directions.right:
 		current_rotation += -PI / 2
+	
+	# figure out where to put the death plane	
+	if current_end_point.y < lowest_point.y:
+		lowest_point.y = current_end_point.y
 		
 	instanced_platforms.push_back(instance)
 	if direction != Directions.straight:
@@ -63,7 +67,6 @@ func add_item_to_pos(item_scene, pos:Vector3):
 	var instance = item_scene.instantiate()
 	self.add_child(instance)
 	instance.global_position = pos
-	instanced_items.push_back(instance)
 	
 func add_items_to_platform(item_scene, platform):
 	for j in platform.spawns.get_children():

@@ -1,3 +1,49 @@
-[gd_scene format=3 uid="uid://6m4jm8b52edq"]
+[gd_scene load_steps=6 format=3 uid="uid://6m4jm8b52edq"]
+
+[ext_resource type="PackedScene" uid="uid://dfodf3bklj65v" path="res://scenes/game_scene/platforms/start_portal.tscn" id="2_nbehd"]
+[ext_resource type="PackedScene" uid="uid://do4kvuf42uomu" path="res://scenes/game_scene/platforms/flat.tscn" id="3_4vbvm"]
+[ext_resource type="PackedScene" uid="uid://ytwihc0drhk0" path="res://scenes/game_scene/platforms/down.tscn" id="4_dpm8q"]
+[ext_resource type="PackedScene" uid="uid://c2oddeq8h65wq" path="res://scenes/game_scene/platforms/portal.tscn" id="5_q4m7a"]
+[ext_resource type="PackedScene" uid="uid://b0iy0r2l8b324" path="res://scenes/game_scene/platforms/connector.tscn" id="6_dquu1"]
 
 [node name="stage_tutorial" type="Node3D"]
+
+[node name="platforms" type="Node3D" parent="."]
+
+[node name="start_portal" parent="platforms" instance=ExtResource("2_nbehd")]
+
+[node name="Flat" parent="platforms" instance=ExtResource("3_4vbvm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Flat2" parent="platforms" instance=ExtResource("3_4vbvm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="Flat3" parent="platforms" instance=ExtResource("3_4vbvm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
+
+[node name="Flat7" parent="platforms" instance=ExtResource("3_4vbvm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.848, 0, 42)
+
+[node name="Flat4" parent="platforms" instance=ExtResource("3_4vbvm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, -14.5, 74)
+
+[node name="down" parent="platforms" instance=ExtResource("4_dpm8q")]
+transform = Transform3D(1, 0, 0, 0, 1.2, 0, 0, 0, 1, -20, 0, 50)
+
+[node name="down2" parent="platforms" instance=ExtResource("4_dpm8q")]
+transform = Transform3D(1, 0, 0, 0, 1.2, 0, 0, 0, 1, -20, -7.25, 62)
+
+[node name="portal" parent="platforms" instance=ExtResource("5_q4m7a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, -14, 82)
+
+[node name="connector" parent="platforms" instance=ExtResource("6_dquu1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38)
+
+[node name="Flat5" parent="platforms" instance=ExtResource("3_4vbvm")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0, 40)
+
+[node name="Flat6" parent="platforms" instance=ExtResource("3_4vbvm")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 0, 40)
+
+[node name="connector2" parent="platforms" instance=ExtResource("6_dquu1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -18, 0, 40)

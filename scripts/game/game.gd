@@ -3,7 +3,7 @@ extends Node3D
 @onready var gamebus = get_node("/root/gamebus")
 
 var gen_scene = preload("res://scenes/game_scene/stages/stage_gen.tscn")
-var test_scene = preload("res://scenes/game_scene/stages/stage_test.tscn")
+var test_scene = preload("res://scenes/game_scene/stages/stage_tutorial.tscn")
 
 var stage_A
 var stage_B
