@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvedmtxc2vo6"]
+[gd_scene load_steps=12 format=3 uid="uid://bvedmtxc2vo6"]
 
 [ext_resource type="Script" path="res://scripts/menu/menu.gd" id="1_wwbac"]
 [ext_resource type="PackedScene" uid="uid://k7qbup211sue" path="res://scenes/menu_scene/ui/menu_overlay.tscn" id="2_mko0d"]
 [ext_resource type="PackedScene" uid="uid://c73ucoibs10a8" path="res://scenes/menu_scene/player.tscn" id="3_rfky1"]
 [ext_resource type="PackedScene" uid="uid://cwolxqhfkkav4" path="res://scenes/menu_scene/stage_selection/stage_selection_circle.tscn" id="4_1btey"]
+[ext_resource type="PackedScene" uid="uid://boejgkecsifjn" path="res://scenes/game_scene/envi/death_floor.tscn" id="5_tdmo5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fwqn5"]
 size = Vector3(100, 1, 100)
@@ -63,3 +64,6 @@ transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 
 
 [node name="stage_selection_circle" parent="." instance=ExtResource("4_1btey")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+
+[node name="death_floor" parent="." instance=ExtResource("5_tdmo5")]
+transform = Transform3D(0.0353553, 0.0353553, -1.54543e-09, 0, -2.18557e-09, -0.05, -0.0353553, 0.0353553, -1.54543e-09, -50, 90, -160)

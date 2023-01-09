@@ -15,7 +15,7 @@ func _ready():
 	self.add_child(stage_A)
 	
 	stage_B = gen_scene.instantiate()
-	stage_B.position = Vector3(10000, 10000, 10000)
+	stage_B.position = Vector3(10000, -10000, 10000)
 	self.add_child(stage_B)
 
 func _on_portal_entered():
@@ -24,5 +24,5 @@ func _on_portal_entered():
 	stage_A.position = Vector3.ZERO
 	
 	stage_B = gen_scene.instantiate()
-	stage_B.position = Vector3(10000, 10000, 10000)
+	stage_B.position = Vector3(10000, -10000, 10000)
 	self.add_child(stage_B)

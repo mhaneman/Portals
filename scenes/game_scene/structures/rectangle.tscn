@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://e0b6q0a7557w"]
+
+[ext_resource type="PackedScene" uid="uid://b0iy0r2l8b324" path="res://scenes/game_scene/platforms/connector.tscn" id="1_ckjpd"]
+[ext_resource type="PackedScene" uid="uid://do4kvuf42uomu" path="res://scenes/game_scene/platforms/flat.tscn" id="2_hl6aa"]
+
+[node name="square" type="Node3D"]
+
+[node name="platforms" type="Node3D" parent="."]
+
+[node name="connector" parent="platforms" instance=ExtResource("1_ckjpd")]
+
+[node name="connector3" parent="platforms" instance=ExtResource("1_ckjpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="connector4" parent="platforms" instance=ExtResource("1_ckjpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 12)
+
+[node name="connector2" parent="platforms" instance=ExtResource("1_ckjpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="connector5" parent="platforms" instance=ExtResource("1_ckjpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 24)
+
+[node name="connector6" parent="platforms" instance=ExtResource("1_ckjpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+
+[node name="Flat" parent="platforms" instance=ExtResource("2_hl6aa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Flat4" parent="platforms" instance=ExtResource("2_hl6aa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 4)
+
+[node name="Flat5" parent="platforms" instance=ExtResource("2_hl6aa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+
+[node name="Flat6" parent="platforms" instance=ExtResource("2_hl6aa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 16)
+
+[node name="Flat2" parent="platforms" instance=ExtResource("2_hl6aa")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, 26)
+
+[node name="Flat3" parent="platforms" instance=ExtResource("2_hl6aa")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, 2)
+
+[node name="points" type="Node3D" parent="."]
+
+[node name="p1" type="Node3D" parent="points"]
+
+[node name="p2" type="Node3D" parent="points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="p3" type="Node3D" parent="points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 14)
+
+[node name="p4" type="Node3D" parent="points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+
+[node name="p5" type="Node3D" parent="points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="p6" type="Node3D" parent="points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 16)
+
+[node name="p7" type="Node3D" parent="points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 2)
+
+[node name="p8" type="Node3D" parent="points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 14)
