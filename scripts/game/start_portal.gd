@@ -26,4 +26,4 @@ func _process(_delta):
 	portal_color_red = lerpf(portal_color_red, wanted_portal_color_red, PORTAL_DECAY_RATE)
 	
 	portal_mesh.mesh.material.set_shader_parameter("size", portal_size)
-	portal_mesh.mesh.material.set_shader_parameter("color", Color(portal_color_red, 0, 0))
+	portal_mesh.mesh.material.set_shader_parameter("color", Color(portal_color_red / 3, 0, 0))

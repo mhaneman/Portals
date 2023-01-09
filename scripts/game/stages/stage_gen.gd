@@ -51,8 +51,11 @@ func finalize_path():
 func generate_with_direction():
 	var chosen
 	for i in gamebus.stage_number + 3:
-		if i % 10 == 0:
+		if i == 0:
+			chosen = down_scenes
+		elif i % 10 == 0:
 			chosen = down_scenes if rng.randi_range(0, 1) else up_scenes
+	
 		await generate_path(chosen)
 
 func generate_items():

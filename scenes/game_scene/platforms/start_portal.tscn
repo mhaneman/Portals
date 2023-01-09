@@ -3,19 +3,19 @@
 [ext_resource type="Script" path="res://scripts/game/start_portal.gd" id="1_2g2hc"]
 [ext_resource type="Material" uid="uid://ye57hwfw5mud" path="res://assets/portals/portal_area.tres" id="1_4hmgj"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jufgi"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_3gksf"]
 size = Vector3(4, 1, 4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_71oae"]
+[sub_resource type="BoxMesh" id="BoxMesh_7b6k7"]
 size = Vector3(4, 1, 4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_nnfav"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_visce"]
 size = Vector3(4, 8, 3.99)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_it5db"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_gbin1"]
 radius = 2.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_ftnp0"]
+[sub_resource type="SphereMesh" id="SphereMesh_6yoew"]
 resource_local_to_scene = true
 material = ExtResource("1_4hmgj")
 radius = 2.0
@@ -28,10 +28,10 @@ script = ExtResource("1_2g2hc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 2)
-shape = SubResource("BoxShape3D_jufgi")
+shape = SubResource("BoxShape3D_3gksf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-mesh = SubResource("BoxMesh_71oae")
+mesh = SubResource("BoxMesh_7b6k7")
 
 [node name="points" type="Node3D" parent="."]
 
@@ -48,15 +48,15 @@ collision_layer = 16
 collision_mask = 32
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="spacing"]
-shape = SubResource("BoxShape3D_nnfav")
+shape = SubResource("BoxShape3D_visce")
 
 [node name="start_portal_area" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="start_portal_area"]
-shape = SubResource("SphereShape3D_it5db")
+shape = SubResource("SphereShape3D_gbin1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="start_portal_area/CollisionShape3D"]
-mesh = SubResource("SphereMesh_ftnp0")
+mesh = SubResource("SphereMesh_6yoew")
 skeleton = NodePath("../../..")

@@ -12,8 +12,8 @@ const JUMP_VELOCITY:float = 15.0
 const FAST_FALL:float = -20.0
 
 const INIT_SPEED:float = 14.0
-const ACCEL:float = 0.3
-const MAX_SPEED:float = 24.0
+const ACCEL:float = 0.1
+const MAX_SPEED:float = 22.0
 var speed:float = INIT_SPEED
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
